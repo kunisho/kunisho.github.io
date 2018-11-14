@@ -8,12 +8,7 @@
 <canvas id="ac" width="300" height="300"></canvas>
 <div id="disp"></div>
 <script>
-
 var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
-
-let x=0;
-let y=0;
-
 ac.ontouchstart = function (e) {
     e.preventDefault();     // デフォルトイベントをキャンセル
     var s = "";             // 変数sを初期化
@@ -25,17 +20,8 @@ ac.ontouchstart = function (e) {
         s += "[" + i + "]";
         s += "x=" + t.pageX + ",";
         s += "y=" + t.pageY + "<br>";
-        x = t.pageX;
-        x = t.pageY;
     }
     document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
-
-        var ctx = document.getElementById("ac").getContext("2d");
-        ctx.beginPath();
-        ctx.arc(x, y, 50, 0, Math.PI*2, true);
-        ctx.stroke();
 };
-
-
 </script>
 </body></html>
