@@ -6,7 +6,7 @@
 <style> canvas{ border: solid 1px red; } </style>
 </head>
 <body>
-<canvas id="ac" width="window.parent.screen.width" height="600"></canvas>
+<canvas id="ac" width="window.parent.screen.width" height=" window.parent.screen.height"></canvas>
 <div id="disp"></div>
 <script>
 var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
@@ -39,7 +39,7 @@ ac.ontouchstart = function (e) {
     ctx.strokeStyle = "white";  //線の色を緑に指定
     ctx.fillStyle = "white";  //塗り潰しの色を赤に指定
     ctx.strokeRect(0,0,0,0);
-    ctx.fillRect(0,0,window.parent.screen.width,600);
+    ctx.fillRect(0,0,window.parent.screen.width, window.parent.screen.height);
 
     ctx.strokeStyle = "black";  //線の色を緑に指定
       for (var i = 0; i < e.touches.length; i++) {
