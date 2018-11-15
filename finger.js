@@ -48,7 +48,7 @@ window.onload = function(){
         //----テキスト-----
               var txt ="数字"; //描画する文字
 
-              ctx.font = "italic 40px Arial"; //フォントにArial,40px,斜体を指定
+              ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
               ctx.fillStyle = "green"; //塗り潰し色を緑に
               ctx.fillText(txt,arrayX[i],arrayY[i]);      //テキストを塗り潰しで描画
 
