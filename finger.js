@@ -1,13 +1,12 @@
 
 
 window.onload = function(){
-  var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
-
+  var ac = document.getElementById("cv"); // canvas要素のオブジェクトを取得
 
 
   ac.ontouchstart = function (e) {
 
-    document.getElementById("disp").innerHTML = "touch"; 
+    document.getElementById("disp").innerHTML = "touch";
 
 
       e.preventDefault();     // デフォルトイベントをキャンセル
@@ -31,7 +30,7 @@ window.onload = function(){
       }
       document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
-      var ctx = document.getElementById("ac").getContext("2d");
+      var ctx = document.getElementById("cv").getContext("2d");
 
 
 
@@ -45,6 +44,15 @@ window.onload = function(){
         ctx.beginPath();
         ctx.arc(arrayX[i], arrayY[i], 50, 0, Math.PI*2, true);
         ctx.stroke();
+
+        //----テキスト-----
+              var txt ="数字"; //描画する文字
+
+              ctx.font = "italic 40px Arial"; //フォントにArial,40px,斜体を指定
+              ctx.fillStyle = "green"; //塗り潰し色を緑に
+              ctx.fillText(txt,arrayX[i],arrayY[i]);      //テキストを塗り潰しで描画
+
+        //------
 
       }
 
