@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <title>タッチイベント検出</title>
 <meta name="viewport" content="width=device-width">
-<style> canvas{ border: solid 1px green; } </style>
+<style> canvas{ border: solid 1px red; } </style>
 </head>
 <body>
 <canvas id="ac" width="800" height="300"></canvas>
@@ -35,11 +35,9 @@ ac.ontouchstart = function (e) {
     var ctx = document.getElementById("ac").getContext("2d");
       for (var i = 0; i < e.touches.length; i++) {
       ctx.beginPath();
-      ctx.arc(arrayX[i], 120, 100, 0, Math.PI*2, true);
+      ctx.arc(arrayX[i], arrayY[i], 100, 0, Math.PI*2, true);
       ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(arrayY[i], 120, 100, 0, Math.PI*2, true);
-      ctx.stroke();
+
     }
 
 };
