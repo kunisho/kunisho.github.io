@@ -41,7 +41,7 @@ ac.ontouchstart = function (e) {
     ctx.strokeRect(0,0,0,0);
     ctx.fillRect(0,0,800,300);
 
-
+    ctx.strokeStyle = "black";  //線の色を緑に指定
       for (var i = 0; i < e.touches.length; i++) {
       ctx.beginPath();
       ctx.arc(arrayX[i], arrayY[i], 100, 0, Math.PI*2, true);
