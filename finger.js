@@ -61,7 +61,7 @@ window.onload = function(){
           ctx.textAlign = "center";
           ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
           ctx.fillStyle = "green"; //塗り潰し色を緑に
-          ctx.fillText(txt,arrayX[i],arrayY[i]-100);      //テキストを塗り潰しで描画
+          ctx.fillText(txt,arrayX[i],arrayY[i]-50);      //テキストを塗り潰しで描画
       }
 
   };
