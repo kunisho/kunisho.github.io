@@ -1,7 +1,7 @@
 
 
 window.onload = function(){
-  var ac = document.getElementById("cv"); // canvas要素のオブジェクトを取得
+  let ac = document.getElementById("cv"); // canvas要素のオブジェクトを取得
 
 
   ac.ontouchstart = function (e) {
@@ -10,15 +10,15 @@ window.onload = function(){
 
 
       e.preventDefault();     // デフォルトイベントをキャンセル
-      var s = "";             // 変数sを初期化
+      let s = "";             // 変数sを初期化
 
-      var arrayX = [];
-      var arrayY = [];
+      let arrayX = [];
+      let arrayY = [];
 
 
       // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
-      for (var i = 0; i < e.touches.length; i++) {
-          var t = e.touches[i];       // 触れている指に関する情報を取得
+      for (let i = 0; i < e.touches.length; i++) {
+          let t = e.touches[i];       // 触れている指に関する情報を取得
 
           s += "[" + i + "]";
           s += "x=" + t.pageX + ",";
@@ -30,7 +30,7 @@ window.onload = function(){
       }
       document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
-      var ctx = document.getElementById("cv").getContext("2d");
+      let ctx = document.getElementById("cv").getContext("2d");
 
 
 
@@ -39,23 +39,28 @@ window.onload = function(){
       ctx.strokeRect(0,0,0,0);
       ctx.fillRect(0,0,1000, 600);
 
+      let OrderNum=[];
+      for(let i = 0; i < e.touches.length; i++){
+        OrderNum.push(i);
+      }
 
 
       ctx.strokeStyle = "black";  //線の色を緑に指定
-        for (var i = 0; i < e.touches.length; i++) {
-        ctx.beginPath();
-        ctx.arc(arrayX[i], arrayY[i], 50, 0, Math.PI*2, true);
-        ctx.stroke();
+        for (let i = 0; i < e.touches.length; i++) {
+          //円書く
+          ctx.beginPath();
+          ctx.arc(arrayX[i], arrayY[i], 50, 0, Math.PI*2, true);
+          ctx.stroke();
+          //----テキスト-----
+          var random = Math.floor(Math.random() * OrderNum.length); // 0~2の値
 
-        //----テキスト-----
-              var txt =1; //描画する文字
+          let txt = OrderNum[random]; //描画する文字
 
-              ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
-              ctx.fillStyle = "green"; //塗り潰し色を緑に
-              ctx.fillText(txt,arrayX[i],arrayY[i]);      //テキストを塗り潰しで描画
+          OrderNum.splice(random, 1);
 
-        //------
-
+          ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
+          ctx.fillStyle = "green"; //塗り潰し色を緑に
+          ctx.fillText(txt,arrayX[i],arrayY[i]);      //テキストを塗り潰しで描画
       }
 
   };
