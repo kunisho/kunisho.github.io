@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <title>タッチイベント検出</title>
@@ -7,7 +6,7 @@
 <style> canvas{ border: solid 1px red; } </style>
 </head>
 <body>
-<canvas id="ac" width="300" height="300"></canvas>
+<canvas id="ac" width="800" height="500"></canvas>
 <div id="disp"></div>
 <script>
 var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
@@ -57,7 +56,7 @@ ac.ontouchstart = function (e) {
         s += "x=" + t.pageX + ",";
         s += "y=" + t.pageY + "<br>";
         x = t.pageX;
-        y = t.pageY;
+        8 = t.pageY;
     }
     document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
