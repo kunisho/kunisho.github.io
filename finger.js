@@ -68,10 +68,11 @@ window.onload = function(){
       ctx.textAlign = "center";
       ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
       ctx.fillStyle = "black"; //塗り潰し色を緑に
-      ctx.fillText(txt,arrayX[i],arrayY[i]-60);
+      ctx.fillText(gg,arrayX[i],arrayY[i]-60);
     }
 
   }
+
   for(let i=0; i<50; i++){
       setInterval(roulette,100);
   }
