@@ -1,7 +1,15 @@
 
 
+window.onload = function(){
   var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
+
+
+
   ac.ontouchstart = function (e) {
+
+    document.getElementById("disp").innerHTML = "touch"; 
+
+
       e.preventDefault();     // デフォルトイベントをキャンセル
       var s = "";             // 変数sを初期化
 
@@ -41,3 +49,5 @@
       }
 
   };
+
+}
