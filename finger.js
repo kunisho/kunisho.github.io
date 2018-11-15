@@ -58,42 +58,23 @@ window.onload = function(){
 
 
   //数字まわす演出
-  // setIntervalを使う方法
-  function sleep(waitSec, callbackFunc) {
-      // 経過時間（秒）
-      var spanedSec = 0;
+  const roulette = ()=>{
+    for (let i = 0; i < e.touches.length; i++) {
+      let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
-      // 1秒間隔で無名関数を実行
-      var id = setInterval(function () {
+      let txt = OrderNum[random]; //描画する文字
 
-          spanedSec++;
-          // 経過時間 >= 待機時間の場合、待機終了。
-          if (spanedSec >= waitSec) {
-            for (let i = 0; i < e.touches.length; i++) {
-              let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
-              let txt = OrderNum[random]; //描画する文字
+      ctx.textAlign = "center";
+      ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
+      ctx.fillStyle = "black"; //塗り潰し色を緑に
+      ctx.fillText(txt,arrayX[i],arrayY[i]-60);
+    }
 
-              ctx.textAlign = "center";
-              ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
-              ctx.fillStyle = "green"; //塗り潰し色を緑に
-              ctx.fillText(txt,arrayX[i],arrayY[i]-60);
-            }
-              // タイマー停止
-              clearInterval(id);
-
-              // 完了時、コールバック関数を実行
-              if (callbackFunc) callbackFunc();
-          }
-      }, 1000);
   }
-
-
-  sleep(5, function () {
-
-      console.log('5秒経過しました！');
-
-  });
+  for(let i=0; i<50; i++){
+      setInterval(roulette,100);
+  }
 
 
 
@@ -106,7 +87,7 @@ window.onload = function(){
 
         ctx.textAlign = "center";
         ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
-        ctx.fillStyle = "green"; //塗り潰し色を緑に
+        ctx.fillStyle = "black"; //塗り潰し色を緑に
         ctx.fillText(txt,arrayX[i],arrayY[i]-60);
       }
 
