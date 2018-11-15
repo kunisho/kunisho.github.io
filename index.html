@@ -33,6 +33,15 @@ ac.ontouchstart = function (e) {
     document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
     var ctx = document.getElementById("ac").getContext("2d");
+
+
+
+    ctx.strokeStyle = "white";  //線の色を緑に指定
+    ctx.fillStyle = "white";  //塗り潰しの色を赤に指定
+    ctx.strokeRect(0,0,0,0);
+    ctx.fillRect(0,0,800,300);
+
+
       for (var i = 0; i < e.touches.length; i++) {
       ctx.beginPath();
       ctx.arc(arrayX[i], arrayY[i], 100, 0, Math.PI*2, true);
