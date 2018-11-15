@@ -39,6 +39,8 @@ window.onload = function(){
       ctx.strokeRect(0,0,0,0);
       ctx.fillRect(0,0,1000, 600);
 
+
+
       ctx.strokeStyle = "black";  //線の色を緑に指定
         for (var i = 0; i < e.touches.length; i++) {
         ctx.beginPath();
@@ -46,7 +48,7 @@ window.onload = function(){
         ctx.stroke();
 
         //----テキスト-----
-              var txt ="数字"; //描画する文字
+              var txt =1; //描画する文字
 
               ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
               ctx.fillStyle = "green"; //塗り潰し色を緑に
