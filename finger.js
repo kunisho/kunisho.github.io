@@ -40,7 +40,7 @@ window.onload = function(){
       ctx.fillRect(0,0,1000, 600);
 
       let OrderNum=[];
-      for(let i = 0; i < e.touches.length; i++){
+      for(let i = 1; i < e.touches.length+1; i++){
         OrderNum.push(i);
       }
 
