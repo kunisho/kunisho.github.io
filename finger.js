@@ -57,25 +57,8 @@ window.onload = function(){
 
 
 
-  // //数字まわす演出
-  // const roulette = ()=>{
-  //   for (let i = 0; i < e.touches.length; i++) {
-  //     let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
-  //
-  //     let txt = OrderNum[random]; //描画する文字
-  //
-  //
-  //     ctx.textAlign = "center";
-  //     ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
-  //     ctx.fillStyle = "black"; //塗り潰し色を緑に
-  //     ctx.fillText("gg",arrayX[i],arrayY[i]-60);
-  //   }
-  //
-  // }
-  //
-  // for(let i=0; i<50; i++){
-  //     setInterval(roulette,100);
-  // }
+
+
 
 
 
@@ -89,7 +72,10 @@ window.onload = function(){
         ctx.textAlign = "center";
         ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
         ctx.fillStyle = "black"; //塗り潰し色を緑に
+        let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
+        ctx.rotate(rad); //回転
         ctx.fillText(txt,arrayX[i],arrayY[i]-60);
+        ctx.rotate(-rad); //回転
       }
 
   };
