@@ -1,54 +1,22 @@
 
-<!DOCTYPE html><html><head>
-<meta charset="UTF-8">
-<title>タッチイベント検出</title>
-<meta name="viewport" content="width=device-width">
-<style> canvas{ border: solid 1px red; } </style>
-</head>
-<body>
-<canvas id="ac" width="window.innerWidth" height="window.innerHeight"></canvas>
-<div id="disp"></div>
-<script>
-var ac = document.getElementById("ac"); // canvas要素のオブジェクトを取得
-ac.ontouchstart = function (e) {
-    e.preventDefault();     // デフォルトイベントをキャンセル
-    var s = "";             // 変数sを初期化
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>タッチイベント検出</title>
+    <meta name="viewport" content="width=device-width">
+    <style> canvas{ border: solid 1px red; } </style>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script type="text/javascript" src="./index.js"></script>
+  </head>
 
-    var arrayX = [];
-    var arrayY = [];
+  <body>
 
+    <div class="contents">
+    <canvas id="ac" width="600" height="600"></canvas>
+    </div>
 
-    // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
-    for (var i = 0; i < e.touches.length; i++) {
-        var t = e.touches[i];       // 触れている指に関する情報を取得
+    <div id="disp"></div>
 
-        s += "[" + i + "]";
-        s += "x=" + t.pageX + ",";
-        s += "y=" + t.pageY + "<br>";
-
-        arrayX.push(t.pageX);
-        arrayY.push(t.pageY);
-        //console.log(array); // ['a', 'b', 'c']
-    }
-    document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
-
-    var ctx = document.getElementById("ac").getContext("2d");
-
-
-
-    ctx.strokeStyle = "white";  //線の色を緑に指定
-    ctx.fillStyle = "white";  //塗り潰しの色を赤に指定
-    ctx.strokeRect(0,0,0,0);
-    ctx.fillRect(0,0,window.innerWidth, window.innerHeight);
-
-    ctx.strokeStyle = "black";  //線の色を緑に指定
-      for (var i = 0; i < e.touches.length; i++) {
-      ctx.beginPath();
-      ctx.arc(arrayX[i], arrayY[i], 50, 0, Math.PI*2, true);
-      ctx.stroke();
-
-    }
-
-};
-</script>
-</body></html>
+  </body>
+</html>
