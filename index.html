@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <title>タッチイベント検出</title>
 <meta name="viewport" content="width=device-width">
-<style> canvas{ border: solid 1px red; } </style>
+<style> canvas{ border: solid 1px green; } </style>
 </head>
 <body>
 <canvas id="ac" width="800" height="300"></canvas>
@@ -14,6 +14,10 @@ ac.ontouchstart = function (e) {
     e.preventDefault();     // デフォルトイベントをキャンセル
     var s = "";             // 変数sを初期化
 
+    var arrayX = [];
+    var arrayY = [];
+
+
     // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
     for (var i = 0; i < e.touches.length; i++) {
         var t = e.touches[i];       // 触れている指に関する情報を取得
@@ -21,8 +25,23 @@ ac.ontouchstart = function (e) {
         s += "[" + i + "]";
         s += "x=" + t.pageX + ",";
         s += "y=" + t.pageY + "<br>";
+
+        arrayX.push(t.pageX);
+        arrayY.push(t.pageY);
+        //console.log(array); // ['a', 'b', 'c']
     }
     document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
+
+    var ctx = document.getElementById("ac").getContext("2d");
+      for (var i = 0; i < e.touches.length; i++) {
+      ctx.beginPath();
+      ctx.arc(arrayX[i], 120, 100, 0, Math.PI*2, true);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(arrayY[i], 120, 100, 0, Math.PI*2, true);
+      ctx.stroke();
+    }
+
 };
 </script>
 </body></html>
