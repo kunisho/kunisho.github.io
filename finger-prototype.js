@@ -39,8 +39,8 @@ window.onload = function(){
       ctx.strokeRect(0,0,0,0);
       ctx.fillRect(0,0,1000, 600);
       //中心のボタン
-      ctx.strokeStyle = "white";  //線の色を緑に指定
-      ctx.fillStyle = "orange";  //塗り潰しの色を赤に指定
+      ctx.strokeStyle = "red";  //線の色を緑に指定
+      ctx.fillStyle = "red";  //塗り潰しの色を赤に指定
       ctx.beginPath();
       ctx.arc(500, 300, 40, 0, Math.PI*2, true);
       ctx.stroke();
