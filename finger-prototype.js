@@ -14,8 +14,7 @@ window.onload = function(){
 
       let arrayX = [];
       let arrayY = [];
-
-
+      let OrderNum=[];
 
       // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
       for (let i = 0; i < e.touches.length; i++) {
@@ -28,6 +27,7 @@ window.onload = function(){
             arrayX.push(t.pageX);
             arrayY.push(t.pageY);
             //console.log(array); // ['a', 'b', 'c']
+            OrderNum.push(i);
         }
       }
 
@@ -57,10 +57,10 @@ window.onload = function(){
       ctx.fillText("スタート",500,300);
 
 
-      let OrderNum=[];
-      for(let i = 1; i < e.touches.length+1; i++){
-        OrderNum.push(i);
-      }
+
+      // for(let i = 1; i < e.touches.length+1; i++){
+      //   OrderNum.push(i);
+      // }
 
 
       ctx.strokeStyle = "black";  //線の色を緑に指定
