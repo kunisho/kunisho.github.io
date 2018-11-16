@@ -15,17 +15,21 @@ window.onload = function(){
       let arrayX = [];
       let arrayY = [];
 
-
-
-
       let ctx = document.getElementById("cv").getContext("2d");
-
-
 
       ctx.strokeStyle = "white";  //線の色を緑に指定
       ctx.fillStyle = "white";  //塗り潰しの色を赤に指定
       ctx.strokeRect(0,0,0,0);
       ctx.fillRect(0,0,1000, 600);
+
+      // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
+      for (let i = 0; i < e.touches.length; i++) {
+          let t = e.touches[i];       // 触れている指に関する情報を取得
+
+          arrayX.push(t.pageX);
+          arrayY.push(t.pageY);
+          //console.log(array); // ['a', 'b', 'c']
+      }
 
       let OrderNum=[];//１から順番に指の数だけ数字が入っている配列[1,2,3,4,5....]
       for(let i = 1; i < e.touches.length+1; i++){
@@ -67,22 +71,19 @@ window.onload = function(){
         // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
         // ctx.rotate(Math.PI / 4); //回転
         ctx.fillText(txt,arrayX[i],arrayY[i]-60);
+
+
+                  s += "[" + i + "]";
+                  s += "x=" + t.pageX + ",";
+                  s += "y=" + t.pageY + ",";
+                  s += "Num=" + touchNum[i] + "<br>";
+
+
       }
+            document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
-      // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
-      for (let i = 0; i < e.touches.length; i++) {
-          let t = e.touches[i];       // 触れている指に関する情報を取得
 
-          s += "[" + i + "]";
-          s += "x=" + t.pageX + ",";
-          s += "y=" + t.pageY + ",";
-          s += "Num=" + touchNum[i] + "<br>";
 
-          arrayX.push(t.pageX);
-          arrayY.push(t.pageY);
-          //console.log(array); // ['a', 'b', 'c']
-      }
-      document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
   };
 
