@@ -77,11 +77,11 @@ window.onload = function(){
         OrderNum.splice(random, 1);
 
         ctx.textAlign = "center";
-        ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
+        ctx.font = "30px Arial"; //フォントにArial,40px,斜体を指定
         ctx.fillStyle = "black"; //塗り潰し色を緑に
         // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
         // ctx.rotate(Math.PI / 4); //回転
-        ctx.fillText(txt,arrayX[i],arrayY[i]-60);
+        ctx.fillText(txt,arrayX[i],arrayY[i]-58);
       }
 
   };
