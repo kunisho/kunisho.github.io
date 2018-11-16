@@ -27,7 +27,7 @@ window.onload = function(){
             arrayX.push(t.pageX);
             arrayY.push(t.pageY);
             //console.log(array); // ['a', 'b', 'c']
-            OrderNum.push(i);
+            OrderNum.push(i+1);
         }
       }
 
