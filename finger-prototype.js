@@ -55,7 +55,7 @@ window.onload = function(){
       ctx.fillStyle = "black"; //塗り潰し色を緑に
       // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
       // ctx.rotate(Math.PI / 4); //回転
-      ctx.fillText("スタート",500,300);
+      ctx.fillText("スタート",500,315);
 
 
 
