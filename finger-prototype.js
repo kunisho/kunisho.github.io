@@ -17,7 +17,7 @@ window.onload = function(){
 
 
       //ボタンの外を推した時
-      if ( ((t.pageX-500)*(t.pageX-500))+((t.pageY-300)*(t.pageY-300))<(100*100)  ) {
+      if ( ((t.pageX-500)*(t.pageX-500))+((t.pageY-300)*(t.pageY-300))>(100*100)  ) {
       // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
       for (let i = 0; i < e.touches.length; i++) {
           let t = e.touches[i];       // 触れている指に関する情報を取得
