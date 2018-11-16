@@ -77,27 +77,29 @@ window.onload = function(){
           ctx.stroke();
       }
 
-
-
-
-
-
-
-
       for (let i = 0; i < e.touches.length; i++) {
-        let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
+          let t = e.touches[i];       // 触れている指に関する情報を取得
+          if ( (t.pageX-500)*(t.pageX-500)+(t.pageY-300)*(t.pageY-300)==(200*200)  ) {
+            for (let i = 0; i < e.touches.length; i++) {
+              let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
-        let txt = OrderNum[random]; //描画する文字
+              let txt = OrderNum[random]; //描画する文字
 
-        OrderNum.splice(random, 1);
+              OrderNum.splice(random, 1);
 
-        ctx.textAlign = "center";
-        ctx.font = "30px Arial"; //フォントにArial,40px,斜体を指定
-        ctx.fillStyle = "black"; //塗り潰し色を緑に
-        // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
-        // ctx.rotate(Math.PI / 4); //回転
-        ctx.fillText(txt,arrayX[i],arrayY[i]-58);
+              ctx.textAlign = "center";
+              ctx.font = "30px Arial"; //フォントにArial,40px,斜体を指定
+              ctx.fillStyle = "black"; //塗り潰し色を緑に
+              // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
+              // ctx.rotate(Math.PI / 4); //回転
+              ctx.fillText(txt,arrayX[i],arrayY[i]-58);
+            }
+          }
       }
+
+
+
+
 
   };
 
