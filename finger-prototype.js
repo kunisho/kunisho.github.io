@@ -56,6 +56,12 @@ window.onload = function(){
       }
 
 
+
+
+
+
+
+
       for (let i = 0; i < e.touches.length; i++) {
         let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
@@ -66,6 +72,8 @@ window.onload = function(){
         ctx.textAlign = "center";
         ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
         ctx.fillStyle = "black"; //塗り潰し色を緑に
+        // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
+        // ctx.rotate(Math.PI / 4); //回転
         ctx.fillText(txt,arrayX[i],arrayY[i]-60);
       }
 
