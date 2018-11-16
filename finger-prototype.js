@@ -79,7 +79,8 @@ window.onload = function(){
 
       for (let i = 0; i < e.touches.length; i++) {
           let t = e.touches[i];       // 触れている指に関する情報を取得
-          if ( ((t.pageX-500)*(t.pageX-500))+((t.pageY-300)*(t.pageY-300))==(100*100)  ) {
+          //if ( ((t.pageX-500)*(t.pageX-500))+((t.pageY-300)*(t.pageY-300))==(100*100)  ) {
+                if ( t.pageX<200 ) {
             for (let i = 0; i < e.touches.length; i++) {
               let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
