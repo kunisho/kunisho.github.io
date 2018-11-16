@@ -45,7 +45,7 @@ window.onload = function(){
 
       ctx.beginPath();
       ctx.strokeStyle = "red";  //線の色を緑に指定
-  
+
       ctx.fillStyle = 'rgba(192, 80, 77, 0.7)'; // 赤
       ctx.arc(500, 300, 100, 0, Math.PI*2, true);
       ctx.stroke();
@@ -66,15 +66,17 @@ window.onload = function(){
 
       ctx.strokeStyle = "black";  //線の色を緑に指定
         for (let i = 0; i < e.touches.length; i++) {
-          //円書く
+          //指の所に円書く
+          /*
           ctx.beginPath();
           ctx.arc(arrayX[i], arrayY[i], 30, 0, Math.PI*2, true);
           ctx.stroke();
-
+          */
+          //数字を囲む円を書く
           ctx.beginPath();
           ctx.arc(arrayX[i], arrayY[i]-70, 20, 0, Math.PI*2, true);
           ctx.stroke();
-
+          //ラインを書く
           ctx.beginPath();     // 1.Pathで描画を開始する
           ctx.moveTo(arrayX[i],arrayY[i]-30); // 2.描画する位置を指定する
           ctx.lineTo(arrayX[i],arrayY[i]-50); // 3.指定座標まで線を引く
