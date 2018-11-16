@@ -43,7 +43,7 @@ window.onload = function(){
       ctx.beginPath();
       ctx.strokeStyle = "red";  //線の色を緑に指定
       ctx.fillStyle = "red";  //塗り潰しの色を赤に指定
-      ctx.arc(500, 300, 100, 0, Math.PI*2, true);
+      ctx.arc(500, 300, 200, 0, Math.PI*2, true);
       ctx.stroke();
       //文字
       ctx.textAlign = "center";
