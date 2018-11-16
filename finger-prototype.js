@@ -43,7 +43,7 @@ window.onload = function(){
       ctx.beginPath();
       ctx.strokeStyle = "red";  //線の色を緑に指定
       ctx.fillStyle = "red";  //塗り潰しの色を赤に指定
-      ctx.arc(500, 300, 200, 0, Math.PI*2, true);
+      ctx.arc(500, 300, 100, 0, Math.PI*2, true);
       ctx.stroke();
       //文字
       ctx.textAlign = "center";
@@ -79,7 +79,7 @@ window.onload = function(){
 
       for (let i = 0; i < e.touches.length; i++) {
           let t = e.touches[i];       // 触れている指に関する情報を取得
-          if ( (t.pageX-500)*(t.pageX-500)+(t.pageY-300)*(t.pageY-300)==(200*200)  ) {
+          if ( (t.pageX-500)*(t.pageX-500)+(t.pageY-300)*(t.pageY-300)==(100*100)  ) {
             for (let i = 0; i < e.touches.length; i++) {
               let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
