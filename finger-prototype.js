@@ -99,11 +99,6 @@ window.onload = function(){
             }
           }
       }
-
-
-
-
-
   };
 
 }
