@@ -51,24 +51,16 @@ window.onload = function(){
           ctx.beginPath();
           ctx.arc(arrayX[i], arrayY[i], 30, 0, Math.PI*2, true);
           ctx.stroke();
-
-          ctx.beginPath();
-          ctx.arc(arrayX[i], arrayY[i]-70, 20, 0, Math.PI*2, true);
-          ctx.stroke();
-
-          ctx.beginPath();     // 1.Pathで描画を開始する
-          ctx.moveTo(arrayX[i],arrayY[i]-30); // 2.描画する位置を指定する
-          ctx.lineTo(arrayX[i],arrayY[i]-50); // 3.指定座標まで線を引く
-          ctx.stroke();
       }
 
+      //あたり表示
+      let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
+      ctx.textAlign = "center";
+      ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
+      ctx.fillStyle = "red"; //塗り潰し色を緑に
+      ctx.fillText("当たり！",arrayX[i],arrayY[i]-58);
 
-
-
-
-
-
-
+/*
       for (let i = 0; i < e.touches.length; i++) {
         let random = Math.floor(Math.random() * OrderNum.length); // 0~触っている指の数の値
 
@@ -83,6 +75,7 @@ window.onload = function(){
         // ctx.rotate(Math.PI / 4); //回転
         ctx.fillText(txt,arrayX[i],arrayY[i]-58);
       }
+      */
 
   };
 
