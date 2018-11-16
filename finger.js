@@ -49,16 +49,16 @@ window.onload = function(){
         for (let i = 0; i < e.touches.length; i++) {
           //円書く
           ctx.beginPath();
-          ctx.arc(arrayX[i], arrayY[i], 50, 0, Math.PI*2, true);
+          ctx.arc(arrayX[i], arrayY[i], 30, 0, Math.PI*2, true);
           ctx.stroke();
 
           ctx.beginPath();
-          ctx.arc(arrayX[i], arrayY[i]-60, 40, 0, Math.PI*2, true);
+          ctx.arc(arrayX[i], arrayY[i]-60, 30, 0, Math.PI*2, true);
           ctx.stroke();
 
           ctx.beginPath();     // 1.Pathで描画を開始する
-          ctx.moveTo(arrayX[i],arrayY[i]-50); // 2.描画する位置を指定する
-          ctx.lineTo(arrayX[i],arrayY[i])-60; // 3.指定座標まで線を引く
+          ctx.moveTo(arrayX[i],arrayY[i]-30); // 2.描画する位置を指定する
+          ctx.lineTo(arrayX[i],arrayY[i]-60); // 3.指定座標まで線を引く
           ctx.stroke();
       }
 
