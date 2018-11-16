@@ -20,16 +20,17 @@ window.onload = function(){
       // 引数のtouchesプロパティは配列の要素数（触れている指の数）だけ繰り返し処理
       for (let i = 0; i < e.touches.length; i++) {
           let t = e.touches[i];       // 触れている指に関する情報を取得
+          if ( ((t.pageX-500)*(t.pageX-500))+((t.pageY-300)*(t.pageY-300))>(100*100)  ) {
+            s += "[" + i + "]";
+            s += "x=" + t.pageX + ",";
+            s += "y=" + t.pageY + "<br>";
 
-          s += "[" + i + "]";
-          s += "x=" + t.pageX + ",";
-          s += "y=" + t.pageY + "<br>";
-
-          arrayX.push(t.pageX);
-          arrayY.push(t.pageY);
-          //console.log(array); // ['a', 'b', 'c']
+            arrayX.push(t.pageX);
+            arrayY.push(t.pageY);
+            //console.log(array); // ['a', 'b', 'c']
+        }
       }
-    
+
       document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
 
