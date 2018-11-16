@@ -5,7 +5,7 @@ window.onload = function(){
 
 
   ac.ontouchstart = function (e) {
-
+    let ctx = document.getElementById("cv").getContext("2d");
     document.getElementById("disp").innerHTML = "touch";
 
 
@@ -30,14 +30,28 @@ window.onload = function(){
       }
       document.getElementById("disp").innerHTML = s;  // 生成した文字列を画面に表示
 
-      let ctx = document.getElementById("cv").getContext("2d");
 
 
 
+//画面クリアー
       ctx.strokeStyle = "white";  //線の色を緑に指定
       ctx.fillStyle = "white";  //塗り潰しの色を赤に指定
       ctx.strokeRect(0,0,0,0);
       ctx.fillRect(0,0,1000, 600);
+      //中心のボタン
+      ctx.strokeStyle = "white";  //線の色を緑に指定
+      ctx.fillStyle = "orange";  //塗り潰しの色を赤に指定
+      ctx.beginPath();
+      ctx.arc(500, 300, 40, 0, Math.PI*2, true);
+      ctx.stroke();
+      //文字
+      ctx.textAlign = "center";
+      ctx.font = "30px Arial"; //フォントにArial,40px,斜体を指定
+      ctx.fillStyle = "black"; //塗り潰し色を緑に
+      // let rad = Math.atan2(500-arrayX[i], arrayY[i]-300);
+      // ctx.rotate(Math.PI / 4); //回転
+      ctx.fillText("スタート",500,300);
+
 
       let OrderNum=[];
       for(let i = 1; i < e.touches.length+1; i++){
