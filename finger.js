@@ -58,7 +58,7 @@ window.onload = function(){
       ctx.textAlign = "center";
       ctx.font = "40px Arial"; //フォントにArial,40px,斜体を指定
       ctx.fillStyle = "red"; //塗り潰し色を緑に
-      ctx.fillText("当たり！",arrayX[i],arrayY[i]-58);
+      ctx.fillText("当たり！",arrayX[random],arrayY[random]-58);
 
 /*
       for (let i = 0; i < e.touches.length; i++) {
