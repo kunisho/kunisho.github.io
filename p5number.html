@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+	<!-- <link rel="stylesheet" type="text/css" href="index.css" /> -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <script src="./node_modules/p5/lib/p5.min.js"></script>
+  <script>
+
+
+
+	var value = 0;
+	let LotteryDecision = true;//trueの時は抽選終わってない falseになったら終了
+	let LotteryDecisionObj =[];
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+		background(255);
+		textAlign(CENTER);
+}
+
+
+function draw() {
+
+  clear();
+	let obj =[];
+	let OrderNum=[];
+
+	for (var i = 0; i < touches.length; i++) {
+		OrderNum.push((i+1));
+	}
+
+
+if(LotteryDecision){//true or false
+	for(var i = 0; i<touches.length; i++){//タッチしてるとこずっと見てる
+		//ここからみる
+		//touchesの中身 ここのobjectに要素を追加すれば使える→ランダムのIDとかここでふれる気がする
+
+		let rand = Math.floor(random(OrderNum.length));
+		let txt = OrderNum[rand];
+		OrderNum.splice(rand, 1);
+
+
+		obj.push(
+			{
+				x:touches[i].x,
+				y:touches[i].y,
+				num:txt
+			}
+		)
+	}
+	for(var i = 0; i<touches.length; i++){
+		textSize(10);
+		text(JSON.stringify(obj[i]), 5, 20+i*10);
+		ellipse(obj[i].x,obj[i].y,50,50);
+		textSize(20);
+		text(obj[i].num, obj[i].x, obj[i].y-50)
+	}
+}else {
+	for(var i = 0; i<LotteryDecisionObj.length; i++){
+		textSize(10);
+		text(JSON.stringify(LotteryDecisionObj[i]), 5, 20+i*10);
+		ellipse(LotteryDecisionObj[i].x,LotteryDecisionObj[i].y,50,50);
+		textSize(20);
+		text(LotteryDecisionObj[i].num, LotteryDecisionObj[i].x, LotteryDecisionObj[i].y-50)
+	}
+}
+
+
+
+
+if((touches.length==5)&&(LotteryDecision)){//仮のルーレット終了トリガー
+	//-----関数にして呼び出すように書き換える
+	for (var i = 0; i < touches.length; i++) {
+		OrderNum.push((i+1));
+	}
+	for(var i = 0; i<touches.length; i++){//タッチしてるとこずっと見てる
+
+		//touchesの中身 ここのobjectに要素を追加すれば使える→ランダムのIDとかここでふれる気がする
+
+		let rand = Math.floor(random(OrderNum.length));
+
+		let txt = OrderNum[rand];
+
+		LotteryDecisionObj.push(
+			{
+				x:touches[i].x,
+				y:touches[i].y,
+				num:txt
+			}
+		)
+		OrderNum.splice(rand, 1);
+	}
+//-------
+	LotteryDecision=false;
+}
+  noStroke();
+	fill(255,0,0);
+  ellipse(width/2,height/2,height/3,height/3);
+	strokeWeight(1);
+	textSize(30);
+	fill(0,0,0);
+  text("抽選開始！", width/2,height/2);
+}
+
+
+  </script>
+
+</head>
+
+<body>
+	<div id="sketch"></div>
+  <h1>Hello p5.js!</h1>
+</body>
+
+</html>
