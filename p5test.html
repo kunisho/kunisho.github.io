@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+	<!-- <link rel="stylesheet" type="text/css" href="index.css" /> -->
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <script src="./node_modules/p5/lib/p5.min.js"></script>
+  <script>
+
+
+
+function setup() {
+
+    createCanvas(displayHeight, displayWidth);
+		background(255);
+
+}
+
+var value = 0;
+
+
+function draw() {
+	var obj =[];
+  clear();
+  var display = touches.length + ' touches';
+
+	for(var i = 0; i<touches.length; i++){
+		//touchesの中身 ここのobjectに要素を追加すれば使える→ランダムのIDとかここでふれる気がする
+		obj.push(
+			{
+				x:touches[i].x,
+				y:touches[i].y
+			}
+		)
+	}
+
+
+
+	for(var i = 0; i<touches.length; i++){
+		text(JSON.stringify(obj[i]), 5, 20+i*10);
+		ellipse(obj[i].x,obj[i].y,50,50);
+	}
+
+  text(display, 5, 10);
+//	text(JSON.stringify(touches[0]), 5, 20);
+	//text(JSON.stringify(obj[0]), 5, 30);
+
+	//ellipse(touches.x,tocuhes.y,50,50);
+
+}
+
+
+  </script>
+
+</head>
+
+<body>
+	<div id="sketch"></div>
+  <h1>Hello p5.js!</h1>
+</body>
+
+</html>
