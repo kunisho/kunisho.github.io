@@ -64,12 +64,10 @@ function draw() {
       rouletteStart = true;//押された
     }
   }
-
-
+  fill('#3498db');
   if(rouletteStart==false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
       textSize(10);
-      text(JSON.stringify(obj[i]), 5, 20+i*10);
       ellipse(obj[i].x,obj[i].y,50,50);
       textSize(20);
       text(obj[i].num, obj[i].x, obj[i].y-50)
@@ -77,7 +75,6 @@ function draw() {
   }else{//ボタンが押された後
     for(var i = 0; i<obj.length; i++){
       textSize(10);
-      text(JSON.stringify(obj[i]), 5, 20+i*10);
       ellipse(obj[i].x,obj[i].y,50,50);
       textSize(20);
       text(obj[i].num, obj[i].x, obj[i].y-50)
@@ -86,10 +83,11 @@ function draw() {
 
   //--真ん中のボタンのビジュアル
   noStroke();
-  fill(255,0,0);
+  fill('#e74c3c');
   ellipse(width/2,height/2,height/3,height/3);
-  strokeWeight(1);
+
+  strokeWeight(5);
   textSize(30);
-  fill(0,0,0);
-  text("抽選開始！", width/2,height/2);
+  fill('#ecf0f1');
+  text("抽選スタート！", width/2,height/2+10);
 }
