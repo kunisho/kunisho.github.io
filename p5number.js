@@ -4,6 +4,15 @@ let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
 
+$(function() {
+    $(window).on('touchmove.noScroll', function(e) {
+        e.preventDefault();
+    });
+    $('.close').on('click', function() {
+        $('.loading_box').hide();
+        $(window).off('.noScroll');
+    });
+});
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,9 +23,22 @@ function setup() {
 
 function draw() {
   clear();
-  let obj =[];//表示するやつ
+
+  stroke(0);
+
+  line(0,0,width,0);
+  line(width-15,0,width-15,height);
+  line(width,height,0,height);
+  line(height,0,0,0);
+
+  noStroke();
+
+  var obj = new Array();
+
   let XYobj = [];//スタート判定用
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
+
+
 
   for (var i = 0; i < touches.length; i++) {
     OrderNum.push((i+1));//[1,2,3,4,5,6...]
@@ -27,6 +49,7 @@ function draw() {
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
     for(var i = 0; i<touches.length; i++){
 
+
         let rand = Math.floor(random(OrderNum.length));//ordernumのindexをランダムに指定 1~n
         let objNum = OrderNum[rand];//ordernumの中からrand番目を取得 4なら、[1,2,3,4,5,6]
         OrderNum.splice(rand, 1);//[1,2,3,5,6]になる
@@ -34,6 +57,7 @@ function draw() {
           {
             x:touches[i].x,
             y:touches[i].y,
+
             num:objNum
           }
         )
@@ -41,8 +65,10 @@ function draw() {
   }else {
     //ぼたんがおされたあと
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
+    obj.length=0;
+
     for(var i = 0; i<DecisionObj.length; i++){
-      obj.push(DecisionObj[i])
+      obj = DecisionObj.concat();
     }
   }
 
@@ -52,9 +78,12 @@ function draw() {
     if( (obj.length>2) && (dist(obj[i].x, obj[i].y, width/2, height/2) < (height/6)) ){
 
       let temp = obj[i].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
+      /*
       for(var j = 0; j<touches.length; j++){
         DecisionObj.push(obj[j])
       }
+      */
+      DecisionObj = obj.concat();
 
       for(var j = 0; j<touches.length; j++){
         if(DecisionObj[j].num==touches.length){
@@ -64,23 +93,32 @@ function draw() {
       rouletteStart = true;//押された
     }
   }
+
   fill('#3498db');
-  if(rouletteStart==false){//ボタンが押される前
+  if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
-      textSize(10);
       ellipse(obj[i].x,obj[i].y,50,50);
+
       textSize(20);
-      text(obj[i].num, obj[i].x, obj[i].y-50)
+      push();
+      translate(obj[i].x, obj[i].y);
+      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+      rotate(a-PI/2);
+      text(obj[i].num, 0, -50);
+      pop();
     }
   }else{//ボタンが押された後
-    for(var i = 0; i<obj.length; i++){
-      textSize(10);
+    for(var i = 0; i<(obj.length-1); i++){
       ellipse(obj[i].x,obj[i].y,50,50);
       textSize(20);
-      text(obj[i].num, obj[i].x, obj[i].y-50)
+      push();
+      translate(obj[i].x, obj[i].y);
+      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+      rotate(a-PI/2);
+      text(obj[i].num, 0, -50);
+      pop();
     }
   }
-
   //--真ん中のボタンのビジュアル
   noStroke();
   fill('#e74c3c');
@@ -90,4 +128,11 @@ function draw() {
   textSize(30);
   fill('#ecf0f1');
   text("抽選スタート！", width/2,height/2+10);
+
+
 }
+
+
+//html button
+// position つかう absolute fixed tatic
+//z-index
