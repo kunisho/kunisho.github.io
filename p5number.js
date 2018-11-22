@@ -105,7 +105,7 @@ function draw() {
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
       text(obj[i].num, 0, -50);
-      text(obj[i].id, 0, -70);
+      //text(obj[i].id, 0, -70); ボールの上にid書く
       pop();
     }
   }else{//ボタンが押された後
