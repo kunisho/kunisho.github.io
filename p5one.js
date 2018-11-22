@@ -4,15 +4,32 @@ let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
 
-$(function() {
-    $(window).on('touchmove.noScroll', function(e) {
-        e.preventDefault();
-    });
-    $('.close').on('click', function() {
-        $('.loading_box').hide();
-        $(window).off('.noScroll');
-    });
-});
+//ーーーーーーーーーーーースクロールオフーーーーーーーーーーーー
+/* "passive" が使えるかどうかを検出 */
+var passiveSupported = false;
+try {
+    document.addEventListener("test", null, Object.defineProperty({}, "passive", {
+        get: function() {
+            passiveSupported = true;
+        }
+    }));
+} catch(err) {}
+
+/* リスナーを登録 */
+document.addEventListener('touchstart', function listener(e) {
+    /* do something */
+    e.preventDefault();
+}, passiveSupported ? { passive: false } : false);
+document.addEventListener('touchmove', function listener(e) {
+    /* do something */
+    e.preventDefault();
+}, passiveSupported ? { passive: false } : false);
+//ーーーーーーーーーーーースクロールオフーーーーーーーーーーーー
+
+
+
+
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -55,10 +72,10 @@ function draw() {
         OrderNum.splice(rand, 1);//[1,2,3,5,6]になる
         obj.push(
           {
-            x:touches[i].x,//x point
-            y:touches[i].y,//y point
+            x:touches[i].x,
+            y:touches[i].y,
             id:i,//0~n
-            num:objNum// 1~n+1
+            num:objNum
           }
         )
     }
@@ -75,7 +92,7 @@ function draw() {
 
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
-    if( (obj.length>2) && (dist(obj[i].x, obj[i].y, width/2, height/2) < (height/6)) ){
+    if( (obj.length>2)&&(obj.length%2 == 1) && (dist(obj[i].x, obj[i].y, width/2, height/2) < (height/6)) ){
 
       let temp = obj[i].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
       /*
@@ -105,20 +122,41 @@ function draw() {
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
       text(obj[i].num, 0, -50);
-      text(obj[i].id, 0, -70);
       pop();
     }
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
-      ellipse(obj[i].x,obj[i].y,50,50);
+      ellipse( obj[i].x, obj[i].y, 50, 50);
       textSize(20);
+      //--------------仮
+      /*
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
       text(obj[i].num, 0, -50);
       pop();
+      */
+      //--------------
     }
+
+    stroke('#e74c3c');
+
+    for(let i = 1 ; i<obj.length ; i+=2 ){
+      let x1,x2,y1,y2;
+      for(var j = 0; j<(obj.length-1); j++){
+        if(obj[j].num==i){
+          x1 = obj[j].x;
+          y1 = obj[j].y;
+        }
+        if(obj[j].num==(i+1)){
+          x2 = obj[j].x;
+          y2 = obj[j].y;
+        }
+      }
+      line(x1,y1,x2,y2);
+    }
+
   }
   //--真ん中のボタンのビジュアル
   noStroke();
@@ -128,7 +166,7 @@ function draw() {
   strokeWeight(5);
   textSize(30);
   fill('#ecf0f1');
-  text("抽選スタート！", width/2,height/2+10);
+  text("ペア決め！", width/2,height/2+10);
 
 
 }
