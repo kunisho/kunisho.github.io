@@ -58,10 +58,12 @@ function draw() {
             x:touches[i].x,//x point
             y:touches[i].y,//y point
             id:i,//0~n
+            time:0,
             num:objNum// 1~n+1
           }
         )
-    }
+        obj[i].time++;
+  }
   }else {
     //ぼたんがおされたあと
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -75,9 +77,9 @@ function draw() {
 
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
-    if( (obj.length>2) && (dist(obj[i].x, obj[i].y, width/2, height/2) < (height/6)) ){
-
-      let temp = obj[i].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
+    if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (obj[i].time<2)  ){
+      text(touches.length,100,100);
+      let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
       /*
       for(var j = 0; j<touches.length; j++){
         DecisionObj.push(obj[j])
@@ -97,6 +99,8 @@ function draw() {
   fill('#3498db');
   if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
+
+
       ellipse(obj[i].x,obj[i].y,50,50);
 
       textSize(20);
@@ -105,7 +109,8 @@ function draw() {
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
       text(obj[i].num, 0, -50);
-      //text(obj[i].id, 0, -70); ボールの上にid書く
+      //text(obj[i].id, 0, -70); //ボールの上にid書く
+      text(obj[i].time, 0, -30); //ボールの上にtime書く
       pop();
     }
   }else{//ボタンが押された後
@@ -122,13 +127,13 @@ function draw() {
   }
   //--真ん中のボタンのビジュアル
   noStroke();
-  fill('#e74c3c');
+  fill(240,86,70,180);
   ellipse(width/2,height/2,height/3,height/3);
 
   strokeWeight(5);
   textSize(30);
-  fill('#ecf0f1');
-  text("抽選スタート！", width/2,height/2+10);
+  fill(255);
+  text(rouletteStart? "順番決定！":"抽選スタート！", width/2,height/2+10);
 
 
 }

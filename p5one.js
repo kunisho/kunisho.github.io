@@ -147,6 +147,7 @@ function draw() {
   textSize(30);
   fill('#ecf0f1');
   text("ペア決め！", width/2,height/2+10);
+  text(obj.length+"人", width/2,height/2+40);
 
 
 }
