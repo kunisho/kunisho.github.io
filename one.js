@@ -7,11 +7,13 @@ let DecisionObj =[];
 let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
+let r;//タッチした指に表示する円の半径
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth,windowHeight );
   background(255);
   textAlign(CENTER);
+  r=height/13;
 }
 
 
@@ -41,18 +43,18 @@ function draw() {
     for(var i = 0; i<touches.length; i++){
 
 
-        let rand = Math.floor(random(OrderNum.length));//ordernumのindexをランダムに指定 1~n
-        let objNum = OrderNum[rand];//ordernumの中からrand番目を取得 4なら、[1,2,3,4,5,6]
-        OrderNum.splice(rand, 1);//[1,2,3,5,6]になる
-        obj.push(
-          {
-            x:touches[i].x,//x point
-            y:touches[i].y,//y point
-            id:i,//0~n
-            num:objNum// 1~n+1
-          }
-        )
-  }
+      let rand = Math.floor(random(OrderNum.length));//ordernumのindexをランダムに指定 1~n
+      let objNum = OrderNum[rand];//ordernumの中からrand番目を取得 4なら、[1,2,3,4,5,6]
+      OrderNum.splice(rand, 1);//[1,2,3,5,6]になる
+      obj.push(
+        {
+          x:touches[i].x,//x point
+          y:touches[i].y,//y point
+          id:i,//0~n
+          num:objNum// 1~n+1
+        }
+      )
+    }
   }else {
     //ぼたんがおされたあと
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -82,11 +84,12 @@ function draw() {
   }
 
   fill('#3498db');
+
   if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
-
-
-      ellipse(obj[i].x,obj[i].y,50,50);
+      noFill();
+      stroke('#3498db');
+      ellipse(obj[i].x,obj[i].y,r,r);
 
       textSize(30);
       push();
@@ -99,23 +102,25 @@ function draw() {
     }
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
-      fill('#3498db');
-      ellipse(obj[i].x,obj[i].y,50,50);
       if(obj[i].num==1){
-      noFill();
-      stroke(240,86,70,180);
-      ellipse(obj[i].x,obj[i].y,70,70);
-      noStroke();
-      fill(250,30,30,180);
-      textSize(30);
-      push();
-      translate(obj[i].x, obj[i].y);
-      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-      rotate(a-PI/2);
-      //text(obj[i].num, 0, -50);
-      text("おめでとう", 0, -50);
-      pop();
-    }
+        noFill();
+        stroke(240,86,70,180);
+        ellipse(obj[i].x,obj[i].y,70,70);
+        noStroke();
+        fill(250,30,30,180);
+        textSize(30);
+        push();
+        translate(obj[i].x, obj[i].y);
+        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+        rotate(a-PI/2);
+        //text(obj[i].num, 0, -50);
+        text("おめでとう", 0, -50);
+        pop();
+      }else{
+        noFill();
+        stroke('#3498db');
+        ellipse(obj[i].x,obj[i].y,r,r);
+      }
     }
   }
   //--真ん中のボタンのビジュアル

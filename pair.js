@@ -2,7 +2,7 @@
 やること
 ・色をペアごとにかえる
 ・演出
-・真ん中のボールのtext考える 
+・真ん中のボールのtext考える
 ・
 */
 
@@ -15,11 +15,13 @@ let DecisionObj =[];
 let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
+let r;//タッチした指に表示する円の半径
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
   textAlign(CENTER);
+  r=height/13;
 }
 
 
@@ -94,20 +96,25 @@ function draw() {
     for(var i = 0; i<touches.length; i++){
 
 
-      ellipse(obj[i].x,obj[i].y,50,50);
+      noFill();
+      stroke('#3498db');
+      ellipse(obj[i].x,obj[i].y,r,r);
+
 
       textSize(30);
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
-      text(obj[i].num, 0, -50);//ボールの上に数字をかく
+      //text(obj[i].num, 0, -50);//ボールの上に数字をかく
       //text(obj[i].id, 0, -70); //ボールの上にid書く
       pop();
     }
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
-      ellipse(obj[i].x,obj[i].y,50,50);
+      noFill();
+      stroke('#3498db');
+      ellipse(obj[i].x,obj[i].y,r,r);
     }
     stroke('#e74c3c');
 
