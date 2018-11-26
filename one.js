@@ -4,11 +4,8 @@ let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
 
-
-
-
-
-
+let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
+let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
 
 function setup() {
@@ -20,21 +17,18 @@ function setup() {
 
 function draw() {
   clear();
-
-  stroke(0);
-
-  line(0,0,width,0);
-  line(width-15,0,width-15,height);
-  line(width,height,0,height);
-  line(height,0,0,0);
-
   noStroke();
 
   var obj = new Array();
-
-  let XYobj = [];//スタート判定用
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
 
+  //
+  if(beforeFrameTouchesLength<touches.length){
+    newTouchBool = true;
+  }else{
+    newTouchBool = false;
+  }
+  beforeFrameTouchesLength = touches.length;
 
 
   for (var i = 0; i < touches.length; i++) {
@@ -52,13 +46,13 @@ function draw() {
         OrderNum.splice(rand, 1);//[1,2,3,5,6]になる
         obj.push(
           {
-            x:touches[i].x,
-            y:touches[i].y,
+            x:touches[i].x,//x point
+            y:touches[i].y,//y point
             id:i,//0~n
-            num:objNum
+            num:objNum// 1~n+1
           }
         )
-    }
+  }
   }else {
     //ぼたんがおされたあと
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -72,15 +66,11 @@ function draw() {
 
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
-    if( (obj.length>2)&&(obj.length%2 == 1) && (dist(obj[i].x, obj[i].y, width/2, height/2) < (height/6)) ){
+    if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
+      text(touches.length,100,100);
+      let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
-      let temp = obj[i].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
-      /*
-      for(var j = 0; j<touches.length; j++){
-        DecisionObj.push(obj[j])
-      }
-      */
-      DecisionObj = obj.concat();
+      DecisionObj = obj.concat();//DecisionObjにobjをコピー
 
       for(var j = 0; j<touches.length; j++){
         if(DecisionObj[j].num==touches.length){
@@ -94,61 +84,49 @@ function draw() {
   fill('#3498db');
   if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
+
+
       ellipse(obj[i].x,obj[i].y,50,50);
 
-      textSize(20);
+      textSize(30);
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
-      text(obj[i].num, 0, -50);
+      //text(obj[i].num, 0, -50);//ボールの上に数字をかく
+      //text(obj[i].id, 0, -70); //ボールの上にid書く
       pop();
     }
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
-      ellipse( obj[i].x, obj[i].y, 50, 50);
-      textSize(20);
-      //--------------仮
-      /*
+      fill('#3498db');
+      ellipse(obj[i].x,obj[i].y,50,50);
+      if(obj[i].num==1){
+      noFill();
+      stroke(240,86,70,180);
+      ellipse(obj[i].x,obj[i].y,70,70);
+      noStroke();
+      fill(250,30,30,180);
+      textSize(30);
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
-      text(obj[i].num, 0, -50);
+      //text(obj[i].num, 0, -50);
+      text("おめでとう", 0, -50);
       pop();
-      */
-      //--------------
     }
-
-    stroke('#e74c3c');
-
-    for(let i = 1 ; i<obj.length ; i+=2 ){
-      let x1,x2,y1,y2;
-      for(var j = 0; j<(obj.length-1); j++){
-        if(obj[j].num==i){
-          x1 = obj[j].x;
-          y1 = obj[j].y;
-        }
-        if(obj[j].num==(i+1)){
-          x2 = obj[j].x;
-          y2 = obj[j].y;
-        }
-      }
-      line(x1,y1,x2,y2);
     }
-
   }
   //--真ん中のボタンのビジュアル
   noStroke();
-  fill('#e74c3c');
+  fill(240,86,70,180);
   ellipse(width/2,height/2,height/3,height/3);
 
   strokeWeight(5);
   textSize(30);
-  fill('#ecf0f1');
-  text("ペア決め！", width/2,height/2+10);
-  text(obj.length+"人", width/2,height/2+40);
-
+  fill(255);
+  text(rouletteStart? "決定！":"抽選スタート！", width/2,height/2+10);
 
 }
 
