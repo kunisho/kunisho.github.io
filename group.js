@@ -1,3 +1,5 @@
+//グループ決めjs
+
 
 let value = 0;
 let rouletteStart = false;//falseはまだ押されてない
@@ -89,35 +91,45 @@ function draw() {
 
 
       noFill();
-      stroke('#3498db');
-      ellipse(obj[i].x,obj[i].y,r,r);
+      stroke('#95a5a6');
+      ellipse(obj[i].x,obj[i].y,r,r);;
 
-      noStroke();
-      fill('#3498db');
-      textSize(30);
-      push();
-      translate(obj[i].x, obj[i].y);
-      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-      rotate(a-PI/2);
-      text(obj[i].num, 0, -50);//ボールの上に数字をかく
-      //text(obj[i].id, 0, -70); //ボールの上にid書く
-      pop();
     }
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
-      noFill();
-      stroke('#3498db');
-      ellipse(obj[i].x,obj[i].y,r,r);
 
-      noStroke();
-      fill('#3498db');
       textSize(30);
-      push();
-      translate(obj[i].x, obj[i].y);
-      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-      rotate(a-PI/2);
-      text(obj[i].num, 0, -50);
-      pop();
+
+      if((obj[i].num%2)==0){
+
+        noFill();
+        stroke('#3498db');
+        ellipse(obj[i].x,obj[i].y,r,r);
+        noStroke();
+        fill('#3498db');
+
+        push();
+        translate(obj[i].x, obj[i].y);
+        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+        rotate(a-PI/2);
+        text("B", 0, -50);
+        pop();
+
+      }else{
+        noFill();
+        stroke('#2ecc71');
+        ellipse(obj[i].x,obj[i].y,r,r);
+        noStroke();
+        fill('#2ecc71');
+
+        push();
+        translate(obj[i].x, obj[i].y);
+        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+        rotate(a-PI/2);
+        text("A", 0, -50);
+        pop();
+      }
+
     }
 
     //------------------------------------------- 矢印表示(仮)→ ------------
@@ -151,7 +163,7 @@ function draw() {
   strokeWeight(5);
   textSize(30);
   fill(255);
-  text(rouletteStart? "順番決定！":"抽選スタート！", width/2,height/2+10);
+  text(rouletteStart? "グループ決定！":"グループ決めスタート", width/2,height/2+10);
 
 }
 
