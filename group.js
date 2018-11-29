@@ -10,6 +10,7 @@ let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
 let r;//タッチした指に表示する円の半径
+let groupCount = 5;//グループ数
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -100,10 +101,50 @@ function draw() {
 
       textSize(30);
 
-      if((obj[i].num%2)==0){
+      let color;
+      let groupText="";
 
+      switch (obj[i].num % groupCount) {
+        case 0:
+         color = [46,204,113];//Emerland green
+         groupText = "A";
+          break;
+        case 1:
+        color = [52,152,219];//Peterriver blue
+        groupText = "B";
+          break;
+        case 2:
+        color = [241,196,15];//sunflower yellow
+        groupText = "C";
+          break;
+        case 3:
+        color = [211,84,0];//Pumpukin orange
+        groupText = "D";
+          break;
+        case 4:
+        color = [155,89,182];//Amethyst purple
+        groupText = "E";
+          break;
+
+        default:
+      }
+      noFill();
+      stroke(color);
+      ellipse(obj[i].x,obj[i].y,r,r);
+      noStroke();
+      fill(color);
+
+      push();
+      translate(obj[i].x, obj[i].y);
+      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+      rotate(a-PI/2);
+      text(groupText, 0, -50);
+      pop();
+/*
+      if((obj[i].num%2)==0){
+        let c = [230,126,34];
         noFill();
-        stroke('#3498db');
+        stroke(c);
         ellipse(obj[i].x,obj[i].y,r,r);
         noStroke();
         fill('#3498db');
@@ -129,6 +170,7 @@ function draw() {
         text("A", 0, -50);
         pop();
       }
+      */
 
     }
 
