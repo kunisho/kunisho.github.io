@@ -20,7 +20,7 @@ let r;//タッチした指に表示する円の半径
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
-  textAlign(CENTER);
+  textAlign(CENTER,CENTER);
   r=height/13;
 }
 

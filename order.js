@@ -73,7 +73,7 @@ function draw() {
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-      text(touches.length,100,100);
+      //text(touches.length,100,100);
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
@@ -87,7 +87,7 @@ function draw() {
     }
   }
 
-  strokeWeight(7);
+  strokeWeight(10);
   if(rouletteStart===false){//ボタンが押される前
     //指の所に数字を書く
     for(var i = 0; i<touches.length; i++){

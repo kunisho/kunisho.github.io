@@ -10,12 +10,17 @@ let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
 let r;//タッチした指に表示する円の半径
-let groupCount = 5;//グループ数
+let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, ....
+
+let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
+const time=30;
+
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(255);
-  textAlign(CENTER);
+  textAlign(CENTER,CENTER);
   r=height/13;
 }
 
@@ -24,8 +29,10 @@ function draw() {
   clear();
   noStroke();
 
+
   var obj = new Array();
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
+
 
   //
   if(beforeFrameTouchesLength<touches.length){
@@ -57,7 +64,9 @@ function draw() {
             num:objNum// 1~n+1
           }
         )
-  }
+
+      }
+
   }else {
     //ぼたんがおされたあと
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -68,9 +77,18 @@ function draw() {
     }
   }
 
-
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
+    //グループ数変更
+    //if((touches.length==1)&&(dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) ){
+    //groupTouchObj = obj.concat();
+    if( (obj.length==1) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
+      console.log("hoge");
+      groupCount++;
+    }
+
+    //}
+    //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
       text(touches.length,100,100);
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
@@ -87,6 +105,7 @@ function draw() {
   }
 
 
+  strokeWeight(10);
   if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
 
@@ -99,12 +118,12 @@ function draw() {
   }else{//ボタンが押された後
     for(var i = 0; i<(obj.length-1); i++){
 
-      textSize(30);
+      textSize(height/16);
 
       let color;
       let groupText="";
 
-      switch (obj[i].num % groupCount) {
+      switch ( (obj[i].num+1) % (groupCount%5+2) ) {
         case 0:
          color = [46,204,113];//Emerland green
          groupText = "A";
@@ -125,6 +144,10 @@ function draw() {
         color = [155,89,182];//Amethyst purple
         groupText = "E";
           break;
+        case 5:
+        color = [230,126,34];//Amethyst purple
+        groupText = "F";
+          break;
 
         default:
       }
@@ -138,7 +161,7 @@ function draw() {
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
-      text(groupText, 0, -50);
+      text(groupText, 0, -height/12);
       pop();
 /*
       if((obj[i].num%2)==0){
@@ -203,12 +226,32 @@ function draw() {
   ellipse(width/2,height/2,height/3,height/3);
 
   strokeWeight(5);
-  textSize(30);
+  textSize(height/16);
   fill(255);
-  text(rouletteStart? "グループ決定！":"グループ決めスタート", width/2,height/2+10);
+
+
+  if(rouletteStart){
+    //ルーレット終わった後　ボタン押された後
+    if( (countMove/time) < (obj.length-1) ) {
+      //結果発表アニメーション中
+      strokeWeight(7);
+      textSize(height/4);
+      text(Math.floor(countMove/time+1), width/2,height/2);
+    }else{
+      //アニメーション終了後
+      strokeWeight(6);
+      textSize(height/24);
+      text("順番決定！", width/2,height/2);
+    }
+
+  }else{
+    //抽選前 ボタン押される前
+    strokeWeight(6);
+    textSize(height/24);
+    text((groupCount%5+2)+"グループ", width/2,height/2);
+  }
 
 }
-
 
 //html button
 // position つかう absolute fixed tatic
