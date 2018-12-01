@@ -72,6 +72,7 @@ function draw() {
 
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
+    //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
       //text(touches.length,100,100);
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
@@ -85,6 +86,12 @@ function draw() {
       }
       rouletteStart = true;//押された
     }
+
+    //抽選後に、真ん中のボタン押すとリロード
+    if( ( ( countMove/time) > (obj.length-1) ) && rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+      location.reload();
+    }
+
   }
 
   strokeWeight(10);
@@ -179,6 +186,7 @@ line(x1,y1,x2,y2);
 //------------------------------------------
 
 }
+
 //--真ん中のボタンのビジュアル
   noStroke();
   fill(240,86,70,180);

@@ -1,4 +1,16 @@
 //グループ決めjs
+//(groupCount+2)%5 ->　グループ数
+
+
+
+
+
+
+// グループ決め　抽選発表のタイミング　調整　色
+
+
+
+
 
 
 let value = 0;
@@ -13,7 +25,7 @@ let r;//タッチした指に表示する円の半径
 let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, ....
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-const time=30;
+const time=60;
 
 
 
@@ -61,6 +73,10 @@ function draw() {
             x:touches[i].x,//x point
             y:touches[i].y,//y point
             id:i,//0~n
+            group:0,//0~6
+            groupText:"",//A~F
+            color3:[],
+            color4:[],
             num:objNum// 1~n+1
           }
         )
@@ -90,8 +106,49 @@ function draw() {
     //}
     //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-      text(touches.length,100,100);
+
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
+
+      switch ( (obj[i].num+1) % (groupCount%5+2) ) {
+        case 0:
+         obj[i].color3 = [46,204,113];//Emerland green
+         obj[i].color4 = [46,204,113,200];//Emerland green
+         obj[i].groupText= "A";
+         obj[i].group = 0;
+          break;
+        case 1:
+        obj[i].color3 = [52,152,219];//Peterriver blue
+        obj[i].color4 = [52,152,219,200];//Peterriver blue
+        obj[i].groupText= "B";
+        obj[i].group = 1;
+          break;
+        case 2:
+        obj[i].color3 = [241,196,15];//sunflower yellow
+        obj[i].color4 = [241,196,15,200];//sunflower yellow
+        obj[i].groupText= "C";
+        obj[i].group = 2;
+          break;
+        case 3:
+        obj[i].color3 = [211,84,0];//Pumpukin orange
+        obj[i].color4 = [211,84,0,200];//Pumpukin orange
+        obj[i].groupText= "D";
+        obj[i].group = 3;
+          break;
+        case 4:
+        obj[i].color3 = [155,89,182];//Amethyst purple
+        obj[i].color4 = [155,89,182,200];//Amethyst purple
+        obj[i].groupText= "E";
+        obj[i].group = 4;
+          break;
+        case 5:
+        obj[i].color3 = [230,126,34];//Amethyst purple
+        obj[i].color4 = [230,126,34,200];//Amethyst purple
+        obj[i].groupText= "F";
+        obj[i].group = 5;
+          break;
+
+        default:
+      }
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
 
@@ -101,6 +158,11 @@ function draw() {
         }
       }
       rouletteStart = true;//押された
+    }
+
+    //抽選後に、真ん中のボタン押すとリロード
+    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+      location.reload();
     }
   }
 
@@ -116,53 +178,49 @@ function draw() {
 
     }
   }else{//ボタンが押された後
+
+    countMove++;//アニメーション用の変数
+
     for(var i = 0; i<(obj.length-1); i++){
 
       textSize(height/16);
 
-      let color;
-      let groupText="";
-
-      switch ( (obj[i].num+1) % (groupCount%5+2) ) {
-        case 0:
-         color = [46,204,113];//Emerland green
-         groupText = "A";
-          break;
-        case 1:
-        color = [52,152,219];//Peterriver blue
-        groupText = "B";
-          break;
-        case 2:
-        color = [241,196,15];//sunflower yellow
-        groupText = "C";
-          break;
-        case 3:
-        color = [211,84,0];//Pumpukin orange
-        groupText = "D";
-          break;
-        case 4:
-        color = [155,89,182];//Amethyst purple
-        groupText = "E";
-          break;
-        case 5:
-        color = [230,126,34];//Amethyst purple
-        groupText = "F";
-          break;
-
-        default:
-      }
       noFill();
-      stroke(color);
+      stroke(obj[i].color3);
       ellipse(obj[i].x,obj[i].y,r,r);
       noStroke();
-      fill(color);
+      fill(obj[i].color3);
 
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
       rotate(a-PI/2);
-      text(groupText, 0, -height/12);
+      text(obj[i].groupText, 0, -height/12);
       pop();
+
+
+      if(countMove < ( (groupCount%5+2)*time ) ){
+
+        for(var j = 0; j<(obj.length-1); j++){
+          //Math.floor(countMove/time)　アニメーション中のグループ
+          if(obj[j].group==Math.floor(countMove/time) ){
+            let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
+            //アニメーションの線を引く
+            console.log(obj[j].color4);
+            stroke(obj[j].color4);
+            let x1,x2,y1,y2;
+            x1 = width /2+(height/6*cos(a)) + (obj[j].x - ( width/2+height/6*cos(a) ))*( 2/3*(countMove%time)/time );
+            y1 = height/2+(height/6*sin(a)) + (obj[j].y - ( height/2+height/6*sin(a) ))*( 2/3*(countMove%time)/time );
+            x2 = width /2+(height/6*cos(a));//真ん中の円の円周 x
+            y2 = height/2+(height/6*sin(a));//真ん中の円の円周 y
+
+            //if( 1+Math.floor(countMove/time)==obj[j].group){
+              line(x1,y1,x2,y2);
+            //}
+          }
+        }
+
+      }
 /*
       if((obj[i].num%2)==0){
         let c = [230,126,34];
@@ -232,16 +290,38 @@ function draw() {
 
   if(rouletteStart){
     //ルーレット終わった後　ボタン押された後
-    if( (countMove/time) < (obj.length-1) ) {
+    if( Math.floor(countMove/time) < (groupCount%5+2) ) {
       //結果発表アニメーション中
+      let txt="";
+      switch (Math.floor(countMove/time)) {
+        case 0:
+         txt = "A";
+          break;
+        case 1:
+        txt = "B";
+          break;
+        case 2:
+        txt = "C";
+          break;
+        case 3:
+        txt = "D";
+          break;
+        case 4:
+        txt = "E";
+          break;
+        case 5:
+        txt = "F";
+          break;
+        default:
+      }
       strokeWeight(7);
       textSize(height/4);
-      text(Math.floor(countMove/time+1), width/2,height/2);
+      text(txt, width/2,height/2);
     }else{
       //アニメーション終了後
       strokeWeight(6);
       textSize(height/24);
-      text("順番決定！", width/2,height/2);
+      text("決定！", width/2,height/2);
     }
 
   }else{

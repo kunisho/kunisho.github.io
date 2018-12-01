@@ -9,6 +9,11 @@ let newTouchBool = false;//そのフレームで新しくタッチが追加さ�
 
 let r;//タッチした指に表示する円の半径
 
+let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
+const time=30;
+
+let randomline = 0;
+
 function setup() {
   createCanvas(windowWidth,windowHeight );
   background(255);
@@ -37,6 +42,7 @@ function draw() {
     OrderNum.push((i+1));//[1,2,3,4,5,6...]
   }
 
+  strokeWeight(10);
   if(!rouletteStart){//ボタンが押される前
     //obj<-touches
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -56,18 +62,80 @@ function draw() {
       )
     }
   }else {
-    //ぼたんがおされたあと
+    //ボタンが押された後
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
     obj.length=0;
 
     for(var i = 0; i<DecisionObj.length; i++){
       obj = DecisionObj.concat();
     }
+
+    //線のアニメーション表示
+    //if(countMove>(i*time)){
+    let t=0;
+    if(countMove<70){
+      t=2
+    }else if (countMove<130) {
+      t=4
+    }else if(countMove<160){
+      t=10
+    }else if(countMove<200){
+      t=15
+    }else if(countMove<220){
+      t=15
+    }else if(countMove<250){
+      t=25
+    }
+
+    if( (countMove%t) == 0 ){
+      randomline = 1 + Math.floor(random(obj.length-1))
+    }
+
+    for(var j = 0; j<(obj.length-1); j++){
+      if(obj[j].num == randomline && countMove<250 ){
+
+          let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
+          //アニメーションの線を引く
+          stroke(241,196,15,200);
+          let x1,x2,y1,y2;
+          x1 = width /2+(height/6*cos(a)) + (obj[j].x - ( width/2+height/6*cos(a) )) - r/2*cos(a);
+          y1 = height/2+(height/6*sin(a)) + (obj[j].y - ( height/2+height/6*sin(a) ))- r/2*sin(a);
+          x2 = width /2+(height/6*cos(a));//真ん中の円の円周 x
+          y2 = height/2+(height/6*sin(a));//真ん中の円の円周 y
+
+          //if( 1+Math.floor(countMove/time)==obj[j].num){
+          line(x1,y1,x2,y2);
+
+      }
+      //}
+      //  }
+    }
+
+
+    if(countMove>250){
+      for(var j = 0; j<(obj.length-1); j++){
+        if(obj[j].num==1){
+          let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
+          //アニメーションの線を引く
+          stroke(241,196,15,200);
+          let x1,x2,y1,y2;
+          x1 = width /2+(height/6*cos(a)) + (obj[j].x - ( width/2+height/6*cos(a) )) - (r/2+height/12)*cos(a);
+          y1 = height/2+(height/6*sin(a)) + (obj[j].y - ( height/2+height/6*sin(a) ))- (r/2+height/12)*sin(a);
+          x2 = width /2+(height/6*cos(a));//真ん中の円の円周 x
+          y2 = height/2+(height/6*sin(a));//真ん中の円の円周 y
+
+          //if( 1+Math.floor(countMove/time)==obj[j].num){
+          line(x1,y1,x2,y2);
+        }
+      }
+    }
+
   }
 
 
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
+    //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
       text(touches.length,100,100);
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
@@ -81,6 +149,10 @@ function draw() {
       }
       rouletteStart = true;//押された
     }
+    //抽選後に、真ん中のボタン押すとリロード
+    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+      location.reload();
+    }
   }
 
   fill('#3498db');
@@ -91,7 +163,7 @@ function draw() {
       stroke('#3498db');
       ellipse(obj[i].x,obj[i].y,r,r);
 
-      textSize(30);
+      textSize(height/16);
       push();
       translate(obj[i].x, obj[i].y);
       let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
@@ -101,38 +173,66 @@ function draw() {
       pop();
     }
   }else{//ボタンが押された後
+
+    countMove++;//アニメーション用の変数
+
     for(var i = 0; i<(obj.length-1); i++){
-      if(obj[i].num==1){
+      if( (obj[i].num==1) && (countMove>250) ){
+
         noFill();
         stroke(240,86,70,180);
-        ellipse(obj[i].x,obj[i].y,70,70);
+        ellipse(obj[i].x,obj[i].y,r,r);
+
         noStroke();
         fill(250,30,30,180);
-        textSize(30);
+        textSize(height/16);
+
         push();
         translate(obj[i].x, obj[i].y);
         let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
         rotate(a-PI/2);
         //text(obj[i].num, 0, -50);
-        text("おめでとう", 0, -50);
+        text("おめでとう!", 0, -height/12);
         pop();
+
       }else{
+
         noFill();
         stroke('#3498db');
         ellipse(obj[i].x,obj[i].y,r,r);
+
       }
     }
   }
+
+
+
   //--真ん中のボタンのビジュアル
   noStroke();
   fill(240,86,70,180);
   ellipse(width/2,height/2,height/3,height/3);
-
-  strokeWeight(5);
-  textSize(30);
   fill(255);
-  text(rouletteStart? "決定！":"抽選スタート！", width/2,height/2+10);
 
+  if(rouletteStart){
+    //ルーレット終わった後　ボタン押された後
+    if( countMove < 250 ) {
+      //結果発表アニメーション中
+      strokeWeight(7);
+      textSize(height/24);
+      text("抽選中...", width/2,height/2);
+    }else{
+      //アニメーション終了後
+      strokeWeight(6);
+      textSize(height/24);
+      text("決定！", width/2,height/2);
+    }
+
+  }else{
+    //抽選前 ボタン押される前
+    strokeWeight(6);
+    textSize(height/24);
+    text("抽選スタート！", width/2,height/2);
+  }
 }
 
 
