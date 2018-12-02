@@ -109,7 +109,15 @@ function draw() {
 
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
-      switch ( (obj[i].num+1) % (groupCount%5+2) ) {
+      DecisionObj = obj.concat();//DecisionObjにobjをコピー
+
+      for(var j = 0; j<touches.length; j++){
+        if(DecisionObj[j].num==touches.length){
+          DecisionObj[j].num = temp;//最大数にstart押した指のnumを代入
+        }
+      }
+
+      switch ( (obj[i].num-1) % (groupCount%5+2) ) {
         case 0:
          obj[i].color3 = [46,204,113];//Emerland green
          obj[i].color4 = [46,204,113,200];//Emerland green
@@ -150,13 +158,6 @@ function draw() {
         default:
       }
 
-      DecisionObj = obj.concat();//DecisionObjにobjをコピー
-
-      for(var j = 0; j<touches.length; j++){
-        if(DecisionObj[j].num==touches.length){
-          DecisionObj[j].num = temp;//最大数にstart押した指のnumを代入
-        }
-      }
       rouletteStart = true;//押された
     }
 
@@ -204,6 +205,8 @@ function draw() {
         let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
         rotate(a-PI/2);
         text(obj[i].groupText, 0, -height/12);
+        //デバック用 num表示
+        //text(obj[i].num, 0, +height/12);
         pop();
       }else{
         noFill();
