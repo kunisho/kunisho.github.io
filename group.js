@@ -160,10 +160,17 @@ function draw() {
       rouletteStart = true;//押された
     }
 
-    //抽選後に、真ん中のボタン押すとリロード
+    //抽選後、真ん中のボタン押した時
     if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
-      location.reload();
+      if(Math.floor(countMove/time)+1 > (groupCount%5+2)){
+        //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
+        location.reload();
+      }else{
+        //抽選後、アニメーション中、真ん中のボタン押すと確定　
+        countMove=(groupCount%5+2)*time;
+      }
     }
+
   }
 
 
@@ -183,20 +190,26 @@ function draw() {
 
     for(var i = 0; i<(obj.length-1); i++){
 
-      textSize(height/16);
+      if(countMove > time*(obj[i].group+1) ){
+        textSize(height/16);
 
-      noFill();
-      stroke(obj[i].color3);
-      ellipse(obj[i].x,obj[i].y,r,r);
-      noStroke();
-      fill(obj[i].color3);
+        noFill();
+        stroke(obj[i].color3);
+        ellipse(obj[i].x,obj[i].y,r,r);
+        noStroke();
+        fill(obj[i].color3);
 
-      push();
-      translate(obj[i].x, obj[i].y);
-      let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-      rotate(a-PI/2);
-      text(obj[i].groupText, 0, -height/12);
-      pop();
+        push();
+        translate(obj[i].x, obj[i].y);
+        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
+        rotate(a-PI/2);
+        text(obj[i].groupText, 0, -height/12);
+        pop();
+      }else{
+        noFill();
+        stroke('#95a5a6');
+        ellipse(obj[i].x,obj[i].y,r,r);;
+      }
 
 
       if(countMove < ( (groupCount%5+2)*time ) ){

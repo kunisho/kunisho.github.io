@@ -88,8 +88,15 @@ function draw() {
     }
 
     //抽選後に、真ん中のボタン押すとリロード
-    if( ( ( countMove/time) > (obj.length-1) ) && rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
-      location.reload();
+    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+
+      if((countMove/time) > (obj.length-1)){
+        //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
+        location.reload();
+      }else{
+        //抽選後、アニメーション中、真ん中のボタン押すと確定　
+        countMove=(obj.length-1)*time;
+      }
     }
 
   }

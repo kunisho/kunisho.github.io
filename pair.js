@@ -1,8 +1,6 @@
 /*
 やること
-・色をペアごとにかえる
-・演出
-・真ん中のボールのtext考える
+アニメーション
 ・
 */
 
@@ -16,6 +14,23 @@ let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
 let r;//タッチした指に表示する円の半径
+
+//https://www.materialui.co/flatuicolors
+const color =　[
+  [192, 57, 43,200],//0 Pomegranate
+  [ 46,204,113,200],//1 Emerland green
+  [ 52,152,219,200],//2 Peterriver blue
+  [241,196, 15,200],//3 sunflower yellow
+  [155, 89,182,200],//4 Amethyst purple
+  [230,126, 34,200],//5 Carrot orange
+  [ 22,160,133,200],//6 Greensea
+  [211, 84,  0,200] //7 Pumpukin orange
+
+]
+
+console.log(color);
+console.log(color[0]);
+console.log(color[0][0]);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -45,6 +60,7 @@ function draw() {
     OrderNum.push((i+1));//[1,2,3,4,5,6...]
   }
 
+  strokeWeight(10);
   if(!rouletteStart){//ボタンが押される前
     //obj<-touches
     //obj{}にtouches{}を入れる (touchesのままだとなぜかxとかが参照できない)
@@ -78,7 +94,7 @@ function draw() {
   for(var i = 0; i<touches.length; i++){
     //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool) &&(obj.length%2 == 1) ){
-      text(touches.length,100,100);
+
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
@@ -96,7 +112,7 @@ function draw() {
     }
   }
 
-  fill('#3498db');
+
   if(rouletteStart===false){//ボタンが押される前
     for(var i = 0; i<touches.length; i++){
 
@@ -116,15 +132,13 @@ function draw() {
       pop();
     }
   }else{//ボタンが押された後
-    for(var i = 0; i<(obj.length-1); i++){
-      noFill();
-      stroke('#3498db');
-      ellipse(obj[i].x,obj[i].y,r,r);
-    }
-    stroke('#e74c3c');
+
 
     for(let i = 1 ; i<obj.length ; i+=2 ){
-      let x1,x2,y1,y2;
+      noFill();
+      stroke(color[(i-1)/2]);
+
+      let x1,x2,y1,y2;//円の中心
       for(var j = 0; j<(obj.length-1); j++){
         if(obj[j].num==i){
           x1 = obj[j].x;
@@ -135,8 +149,19 @@ function draw() {
           y2 = obj[j].y;
         }
       }
-      line(x1,y1,x2,y2);
+
+      let a = atan2(y1-y2, x1-x2);
+
+      ellipse(x1,y1,r,r);
+      ellipse(x2,y2,r,r);
+      line(
+        x1-(r/2)*cos(a),
+        y1-(r/2)*sin(a),
+        x2+(r/2)*cos(a),
+        y2+(r/2)*sin(a)
+      );
     }
+
   }
 
   //--真ん中のボタンのビジュアル
@@ -145,14 +170,16 @@ function draw() {
 
   ellipse(width/2,height/2,height/3,height/3);
 
-  strokeWeight(5);
-  textSize(30);
-  fill('#ecf0f1');
+  strokeWeight(7);
+  fill(255);
   if(!rouletteStart){
-    text("ペア決め！", width/2,height/2+10);
-    text(obj.length+"人", width/2,height/2+40);
+    textSize(height/30);
+    text("ペア決めスタート！", width/2,height/2-height/24);
+    textSize(height/12);
+    text(obj.length+"人", width/2,height/2+height/24);
   }else{
-    text("決まったよ！", width/2,height/2+10);
+    textSize(height/24);
+    text("ペア決定！", width/2,height/2);
   }
 
 }
