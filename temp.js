@@ -1,7 +1,7 @@
 var sample;
 
 function preload() {
-  sample = loadSound('assets/se01.wav');
+  sample = loadSound('src/my-drumroll.wav');
 }
 
 function setup() {
