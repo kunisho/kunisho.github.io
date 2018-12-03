@@ -87,7 +87,7 @@ function draw() {
     }
 
     //抽選後に、真ん中のボタン押すとリロード
-    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+    if(rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
 
       if((countMove/time) > (obj.length-1)){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　

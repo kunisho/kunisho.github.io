@@ -15,7 +15,7 @@ let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, .... //groupCount%5+
 
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-const time=60;
+const time=50;
 
 
 
@@ -152,7 +152,7 @@ function draw() {
     }
 
     //抽選後、真ん中のボタン押した時
-    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+    if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
       if(Math.floor(countMove/time)+1 > (groupCount%5+2)){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
         location.reload();

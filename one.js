@@ -149,7 +149,7 @@ function draw() {
       rouletteStart = true;//押された
     }
     //抽選後、真ん中のボタン押した時
-    if( rouletteStart  && (dist(touches[0].x, touches[0].y, width/2, height/2) < (height/6) ) && (touches.length==1)&& (newTouchBool)){
+    if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
       if(countMove>250){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
         location.reload();
@@ -189,7 +189,7 @@ function draw() {
         ellipse(obj[i].x,obj[i].y,r,r);
 
         noStroke();
-        fill(250,30,30,180);
+        fill(250,30,30);
         textSize(height/16);
 
         push();
