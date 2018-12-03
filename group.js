@@ -17,6 +17,13 @@ let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, .... //groupCount%5+
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
 const time=50;
 
+let drumroll;
+
+
+
+function preload() {
+  drumroll = loadSound('src/my-drumroll.wav');
+}
 
 
 function setup() {
@@ -89,7 +96,6 @@ function draw() {
     //if((touches.length==1)&&(dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) ){
     //groupTouchObj = obj.concat();
     if( (obj.length==1) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-      console.log("hoge");
       groupCount++;
     }
 
@@ -149,6 +155,7 @@ function draw() {
       }
 
       rouletteStart = true;//押された
+      //  drumroll.play();
     }
 
     //抽選後、真ん中のボタン押した時
