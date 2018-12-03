@@ -105,8 +105,8 @@ function draw() {
 
     //}
     //抽選開始
-    if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-
+    if( (newTouchBool) && ((groupCount%5+2)<obj.length) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))  ){
+      //新しく指にタッチされた&指の数がグループ数以上&真ん中押された
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
@@ -237,38 +237,6 @@ function draw() {
         }
 
       }
-/*
-      if((obj[i].num%2)==0){
-        let c = [230,126,34];
-        noFill();
-        stroke(c);
-        ellipse(obj[i].x,obj[i].y,r,r);
-        noStroke();
-        fill('#3498db');
-
-        push();
-        translate(obj[i].x, obj[i].y);
-        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-        rotate(a-PI/2);
-        text("B", 0, -50);
-        pop();
-
-      }else{
-        noFill();
-        stroke('#2ecc71');
-        ellipse(obj[i].x,obj[i].y,r,r);
-        noStroke();
-        fill('#2ecc71');
-
-        push();
-        translate(obj[i].x, obj[i].y);
-        let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
-        rotate(a-PI/2);
-        text("A", 0, -50);
-        pop();
-      }
-      */
-
     }
 
     //------------------------------------------- 矢印表示(仮)→ ------------
