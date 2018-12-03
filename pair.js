@@ -5,18 +5,18 @@
 */
 
 
-let value = 0;
 let rouletteStart = false;//falseはまだ押されてない
+let r;//タッチした指に表示する円の半径
 
 let DecisionObj =[];
 
 let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
-let r;//タッチした指に表示する円の半径
+
 
 //https://www.materialui.co/flatuicolors
-const color =　[
+const color =　[ //8行
   [192, 57, 43,200],//0 Pomegranate
   [ 46,204,113,200],//1 Emerland green
   [ 52,152,219,200],//2 Peterriver blue
@@ -25,12 +25,8 @@ const color =　[
   [230,126, 34,200],//5 Carrot orange
   [ 22,160,133,200],//6 Greensea
   [211, 84,  0,200] //7 Pumpukin orange
-
 ]
 
-console.log(color);
-console.log(color[0]);
-console.log(color[0][0]);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

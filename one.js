@@ -1,5 +1,5 @@
 
-let value = 0;
+
 let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
@@ -124,7 +124,6 @@ function draw() {
           x2 = width /2+(height/6*cos(a));//真ん中の円の円周 x
           y2 = height/2+(height/6*sin(a));//真ん中の円の円周 y
 
-          //if( 1+Math.floor(countMove/time)==obj[j].num){
           line(x1,y1,x2,y2);
         }
       }
@@ -137,7 +136,7 @@ function draw() {
   for(var i = 0; i<touches.length; i++){
     //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-      text(touches.length,100,100);
+
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー

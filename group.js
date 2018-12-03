@@ -1,28 +1,18 @@
 //グループ決めjs
-//(groupCount+2)%5 ->　グループ数
 
 
 
-
-
-
-// グループ決め　抽選発表のタイミング　調整　色
-
-
-
-
-
-
-let value = 0;
 let rouletteStart = false;//falseはまだ押されてない
+let r;//タッチした指に表示する円の半径
 
 let DecisionObj =[];
 
 let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
-let r;//タッチした指に表示する円の半径
-let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, ....
+
+let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, .... //groupCount%5+2 ->　グループ数
+
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
 const time=60;
@@ -222,7 +212,7 @@ function draw() {
           if(obj[j].group==Math.floor(countMove/time) ){
             let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
             //アニメーションの線を引く
-            console.log(obj[j].color4);
+
             stroke(obj[j].color4);
             let x1,x2,y1,y2;
             x1 = width /2+(height/6*cos(a)) + (obj[j].x - ( width/2+height/6*cos(a) ))*( 2/3*(countMove%time)/time );
@@ -230,38 +220,13 @@ function draw() {
             x2 = width /2+(height/6*cos(a));//真ん中の円の円周 x
             y2 = height/2+(height/6*sin(a));//真ん中の円の円周 y
 
-            //if( 1+Math.floor(countMove/time)==obj[j].group){
               line(x1,y1,x2,y2);
-            //}
           }
         }
-
       }
     }
-
-    //------------------------------------------- 矢印表示(仮)→ ------------
-    /*
-    stroke(241,196,15,150);
-    for(var i = 0; i<(obj.length-1); i++){
-      let x1,x2,y1,y2;
-      for(var j = 0; j<(obj.length-1); j++){
-        if(obj[j].num==i){
-          x1 = obj[j].x;
-          y1 = obj[j].y;
-        }
-        if(obj[j].num==(i+1)){
-          x2 = obj[j].x;
-          y2 = obj[j].y;
-        }
-      }
-      line(x1,y1,x2,y2);
-    }
-    */
-
-    //------------------------------------------
-
-
   }
+
   //--真ん中のボタンのビジュアル
   noStroke();
   fill(240,86,70,180);

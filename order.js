@@ -1,5 +1,4 @@
 
-let value = 0;
 let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
@@ -74,7 +73,7 @@ function draw() {
   for(var i = 0; i<touches.length; i++){
     //抽選開始
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
-      //text(touches.length,100,100);
+
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
