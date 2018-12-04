@@ -20,6 +20,7 @@ let randomline = 0;
 
 function preload() {
   drumroll = loadSound('src/my-drumroll.wav');
+  drumroll2 = loadSound('src/my-drumroll2.wav');
 }
 
 
@@ -92,8 +93,8 @@ function draw() {
       t=15
     }else if(countMove<220){
       t=15
-    }else if(countMove<250){
-      t=25
+    }else if(countMove<260){
+      t=20
     }
 
     if( (countMove%t) == 0 ){
@@ -101,7 +102,6 @@ function draw() {
     }
 
     for(var j = 0; j<(obj.length-1); j++){
-      if(obj[j].num == randomline && countMove<250 ){
 
           let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
           //アニメーションの線を引く
@@ -121,7 +121,7 @@ function draw() {
     }
 
 
-    if(countMove>250){
+    if(countMove>260){
       for(var j = 0; j<(obj.length-1); j++){
         if(obj[j].num==1){
           let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
@@ -162,12 +162,14 @@ function draw() {
     }
     //抽選後、真ん中のボタン押した時
     if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
-      if(countMove>250){
+      if(countMove>260){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
         location.reload();
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
-        countMove=250;
+        countMove=260;
+        drumroll.stop();
+        drumroll2.play();
       }
     }
   }
@@ -194,7 +196,7 @@ function draw() {
     countMove++;//アニメーション用の変数
 
     for(var i = 0; i<(obj.length-1); i++){
-      if( (obj[i].num==1) && (countMove>250) ){
+      if( (obj[i].num==1) && (countMove>260) ){
 
         noFill();
         stroke(240,86,70,180);
@@ -232,7 +234,7 @@ function draw() {
 
   if(rouletteStart){
     //ルーレット終わった後　ボタン押された後
-    if( countMove < 250 ) {
+    if( countMove < 260 ) {
       //結果発表アニメーション中
       strokeWeight(7);
       textSize(height/24);
