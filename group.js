@@ -102,8 +102,10 @@ function draw() {
 
     //}
     //抽選開始
-    if( (newTouchBool) && ((groupCount%5+2)<obj.length) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))  ){
+    if(!rouletteStart){
+    if(newTouchBool && ((groupCount%5+2)<obj.length) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))  ){
       //新しく指にタッチされた&指の数がグループ数以上&真ん中押された
+      if(!rouletteStart){
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 
       DecisionObj = obj.concat();//DecisionObjにobjをコピー
@@ -113,53 +115,60 @@ function draw() {
           DecisionObj[j].num = temp;//最大数にstart押した指のnumを代入
         }
       }
-
-      switch ( (obj[i].num-1) % (groupCount%5+2) ) {
+    }
+    for(var j = 0; j<touches.length; j++){
+      switch ( (DecisionObj[j].num-1) % (groupCount%5+2) ) {
         case 0:
-         obj[i].color3 = [46,204,113];//Emerland green
-         obj[i].color4 = [46,204,113,200];//Emerland green
-         obj[i].groupText= "A";
-         obj[i].group = 0;
+         DecisionObj[j].color3 = [46,204,113];//Emerland green
+         DecisionObj[j].color4 = [46,204,113,200];//Emerland green
+         DecisionObj[j].groupText= "A";
+         DecisionObj[j].group = 0;
           break;
         case 1:
-        obj[i].color3 = [52,152,219];//Peterriver blue
-        obj[i].color4 = [52,152,219,200];//Peterriver blue
-        obj[i].groupText= "B";
-        obj[i].group = 1;
+        DecisionObj[j].color3 = [52,152,219];//Peterriver blue
+        DecisionObj[j].color4 = [52,152,219,200];//Peterriver blue
+        DecisionObj[j].groupText= "B";
+        DecisionObj[j].group = 1;
           break;
         case 2:
-        obj[i].color3 = [241,196,15];//sunflower yellow
-        obj[i].color4 = [241,196,15,200];//sunflower yellow
-        obj[i].groupText= "C";
-        obj[i].group = 2;
+        DecisionObj[j].color3 = [241,196,15];//sunflower yellow
+        DecisionObj[j].color4 = [241,196,15,200];//sunflower yellow
+        DecisionObj[j].groupText= "C";
+        DecisionObj[j].group = 2;
           break;
         case 3:
-        obj[i].color3 = [211,84,0];//Pumpukin orange
-        obj[i].color4 = [211,84,0,200];//Pumpukin orange
-        obj[i].groupText= "D";
-        obj[i].group = 3;
+        DecisionObj[j].color3 = [211,84,0];//Pumpukin orange
+        DecisionObj[j].color4 = [211,84,0,200];//Pumpukin orange
+        DecisionObj[j].groupText= "D";
+        DecisionObj[j].group = 3;
           break;
         case 4:
-        obj[i].color3 = [155,89,182];//Amethyst purple
-        obj[i].color4 = [155,89,182,200];//Amethyst purple
-        obj[i].groupText= "E";
-        obj[i].group = 4;
+        DecisionObj[j].color3 = [155,89,182];//Amethyst purple
+        DecisionObj[j].color4 = [155,89,182,200];//Amethyst purple
+        DecisionObj[j].groupText= "E";
+        DecisionObj[j].group = 4;
           break;
         case 5:
-        obj[i].color3 = [230,126,34];//Amethyst purple
-        obj[i].color4 = [230,126,34,200];//Amethyst purple
-        obj[i].groupText= "F";
-        obj[i].group = 5;
+        DecisionObj[j].color3 = [230,126,34];//Amethyst purple
+        DecisionObj[j].color4 = [230,126,34,200];//Amethyst purple
+        DecisionObj[j].groupText= "F";
+        DecisionObj[j].group = 5;
           break;
 
         default:
       }
+    }
+
+
+      console.log(obj);
+
       if(!rouletteStart){
         drumroll.play();
       }
       rouletteStart = true;//押された
 
     }
+  }
 
     //抽選後、真ん中のボタン押した時
     if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
@@ -222,8 +231,9 @@ function draw() {
           if(obj[j].group==Math.floor(countMove/time) ){
             let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
             //アニメーションの線を引く
-
+            console.log(obj);
             stroke(obj[j].color4);
+            //stroke(0,0,0);
             let x1,x2,y1,y2;
             x1 = width /2+(height/6*cos(a)) + (obj[j].x - ( width/2+height/6*cos(a) ))*( 2/3*(countMove%time)/time );
             y1 = height/2+(height/6*sin(a)) + (obj[j].y - ( height/2+height/6*sin(a) ))*( 2/3*(countMove%time)/time );

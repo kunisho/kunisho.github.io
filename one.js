@@ -1,5 +1,9 @@
 
 
+/*
+一人だけじゃなくて当選する人数変更できるようにする
+*/
+
 let rouletteStart = false;//falseはまだ押されてない
 
 let DecisionObj =[];
@@ -102,6 +106,7 @@ function draw() {
     }
 
     for(var j = 0; j<(obj.length-1); j++){
+      if(obj[j].num == randomline && countMove<260 ){
 
           let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
           //アニメーションの線を引く
