@@ -8,11 +8,20 @@ let beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開
 let newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
 
 let r;//タッチした指に表示する円の半径
+let drumroll;
+
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
 const time=30;
 
 let randomline = 0;
+
+
+
+function preload() {
+  drumroll = loadSound('src/my-drumroll.wav');
+}
+
 
 function setup() {
   createCanvas(windowWidth,windowHeight );
@@ -145,6 +154,9 @@ function draw() {
         if(DecisionObj[j].num==touches.length){
           DecisionObj[j].num = temp;//最大数にstart押した指のnumを代入
         }
+      }
+      if(!rouletteStart){
+        drumroll.play();
       }
       rouletteStart = true;//押された
     }

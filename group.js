@@ -31,6 +31,7 @@ function setup() {
   background(255);
   textAlign(CENTER,CENTER);
   r=height/13;
+
 }
 
 
@@ -153,9 +154,11 @@ function draw() {
 
         default:
       }
-
+      if(!rouletteStart){
+        drumroll.play();
+      }
       rouletteStart = true;//押された
-      //  drumroll.play();
+
     }
 
     //抽選後、真ん中のボタン押した時
