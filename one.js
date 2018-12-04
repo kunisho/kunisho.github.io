@@ -149,7 +149,7 @@ function draw() {
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
     //抽選開始
-    if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
+    if(!rouletteStart&& (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
 
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
 

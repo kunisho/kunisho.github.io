@@ -72,6 +72,7 @@ function draw() {
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
     //抽選開始
+    if(!rouletteStart){
     if( (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
 
       let temp = obj[(touches.length-1)].num;//スタートボタン押した指のnumを保存　→　一番大きいnumの所にこれを代入すればいける
@@ -85,6 +86,7 @@ function draw() {
       }
       rouletteStart = true;//押された
     }
+  }
 
     //抽選後に、真ん中のボタン押すとリロード
     if(rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
