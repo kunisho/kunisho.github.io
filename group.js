@@ -18,11 +18,14 @@ let countMove=0;//抽選の結果発表時のアニメーション用のカウ�
 const time=50;
 
 let drumroll;
-
+let drumrollBool = [];
 
 
 function preload() {
-  drumroll = loadSound('src/my-drumroll.wav');
+  for (var i = 0; i < 17; i++) {
+    drumroll = loadSound('src/drum.wav');
+    drumrollBool.push(true);
+  }
 }
 
 
@@ -162,9 +165,7 @@ function draw() {
 
       console.log(obj);
 
-      if(!rouletteStart){
-        drumroll.play();
-      }
+  
       rouletteStart = true;//押された
 
     }
@@ -217,6 +218,12 @@ function draw() {
         //デバック用 num表示
         //text(obj[i].num, 0, +height/12);
         pop();
+
+        if(drumrollBool[obj[i].group]){
+          drumroll.play();
+          drumrollBool[obj[i].group]=false;
+        }
+
       }else{
         noFill();
         stroke('#95a5a6');

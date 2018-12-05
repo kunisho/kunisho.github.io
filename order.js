@@ -9,7 +9,18 @@ let newTouchBool = false;//そのフレームで新しくタッチが追加さ�
 let r;//タッチした指に表示する円の半径
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-const time=30;
+const time=40;
+
+let drumroll;
+let drumrollBool = [];
+
+
+function preload() {
+  for (var i = 0; i < 17; i++) {
+    drumroll = loadSound('src/drum.wav');
+    drumrollBool.push(true);
+  }
+}
 
 
 function setup() {
@@ -84,6 +95,7 @@ function draw() {
           DecisionObj[j].num = temp;//最大数にstart押した指のnumを代入
         }
       }
+
       rouletteStart = true;//押された
     }
   }
@@ -147,8 +159,15 @@ function draw() {
             rotate(a-PI/2);
             text(obj[j].num, 0, -height/12);
             pop();
+
+            if(drumrollBool[j]){
+              drumroll.play();
+              drumrollBool[j]=false;
+            }
+
           }
         }
+
       }
       //線のアニメーション表示
       if(countMove>(i*time)){
