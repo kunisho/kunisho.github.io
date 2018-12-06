@@ -215,13 +215,14 @@ line(x1,y1,x2,y2);
 }
 
 //--真ん中のボタンのビジュアル
-  noStroke();
-  fill(240,86,70,180);
-  ellipse(width/2,height/2,height/3,height/3);
-  fill(255);
+
 
   if(rouletteStart){
     //ルーレット終わった後　ボタン押された後
+    noStroke();
+    fill(240,86,70,180);
+    ellipse(width/2,height/2,height/3,height/3);
+    fill(255);
     if( (countMove/time) < (obj.length-1) ) {
       //結果発表アニメーション中
       strokeWeight(7);
@@ -236,9 +237,33 @@ line(x1,y1,x2,y2);
 
   }else{
     //抽選前 ボタン押される前
-    strokeWeight(6);
-    textSize(height/24);
-    text("抽選スタート！", width/2,height/2);
+    if(obj.length>1){
+      //押せる時
+      noStroke();
+      fill(231,76,60 ,230);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/28);
+      text("順番決めスタート！", width/2,height/2);
+      textSize(height/20);
+      text(obj.length+"人", width/2,height/2+height/20);
+    }else{
+      //押せる前
+      noStroke();
+      fill(240,86,70,180);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/28);
+      text("順番決め抽選", width/2,height/2);
+      textSize(height/20);
+      text(obj.length+"人", width/2,height/2+height/20);
+
+    }
+
   }
 
 }

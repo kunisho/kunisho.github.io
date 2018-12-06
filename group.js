@@ -255,17 +255,20 @@ function draw() {
   }
 
   //--真ん中のボタンのビジュアル
-  noStroke();
-  fill(240,86,70,180);
-  ellipse(width/2,height/2,height/3,height/3);
 
-  strokeWeight(5);
-  textSize(height/16);
-  fill(255);
+
+
+
 
 
   if(rouletteStart){
     //ルーレット終わった後　ボタン押された後
+
+    noStroke();
+    fill(240,86,70,180);
+    ellipse(width/2,height/2,height/3,height/3);
+    fill(255);
+
     if( Math.floor(countMove/time) < (groupCount%5+2) ) {
       //結果発表アニメーション中
       let txt="";
@@ -302,9 +305,33 @@ function draw() {
 
   }else{
     //抽選前 ボタン押される前
-    strokeWeight(6);
-    textSize(height/24);
-    text((groupCount%5+2)+"グループ", width/2,height/2);
+
+
+
+    if( ((groupCount%5+2)<obj.length+1)){
+
+      noStroke();
+      fill(231,76,60 ,230);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/24);
+      text((groupCount%5+2)+"グループ", width/2,height/2-height/24);
+      strokeWeight(15);
+      textSize(height/34);
+      text("グループ決めスタート！", width/2,height/2+height/34);
+    }else{
+      noStroke();
+      fill(240,86,70,180);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/24);
+      text((groupCount%5+2)+"グループ", width/2,height/2-height/24);
+    }
+
   }
 
 }

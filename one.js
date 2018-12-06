@@ -253,9 +253,33 @@ function draw() {
 
   }else{
     //抽選前 ボタン押される前
-    strokeWeight(6);
-    textSize(height/24);
-    text("抽選スタート！", width/2,height/2);
+    //抽選前 ボタン押される前
+    if(obj.length>1){
+      //押せる時
+      noStroke();
+      fill(231,76,60 ,230);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/28);
+      text("抽選スタート！", width/2,height/2);
+      textSize(height/20);
+      text(obj.length+"人", width/2,height/2+height/20);
+    }else{
+      //押せる前
+      noStroke();
+      fill(240,86,70,180);
+      ellipse(width/2,height/2,height/3,height/3);
+      fill(255);
+
+      strokeWeight(6);
+      textSize(height/28);
+      text("抽選", width/2,height/2);
+      textSize(height/20);
+      text(obj.length+"人", width/2,height/2+height/20);
+
+    }
   }
 }
 
