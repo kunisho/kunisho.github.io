@@ -260,7 +260,9 @@ line(x1,y1,x2,y2);
       textSize(height/28);
       text("順番決め抽選", width/2,height/2);
       textSize(height/20);
-      text(obj.length+"人", width/2,height/2+height/20);
+      if(obj.length>0){
+        text(obj.length+"人", width/2,height/2+height/20);  
+      }
 
     }
 

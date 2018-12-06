@@ -277,7 +277,9 @@ function draw() {
       textSize(height/28);
       text("抽選", width/2,height/2);
       textSize(height/20);
-      text(obj.length+"人", width/2,height/2+height/20);
+      if(obj.length>0){
+        text(obj.length+"人", width/2,height/2+height/20);
+      }
 
     }
   }
