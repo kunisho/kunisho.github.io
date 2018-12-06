@@ -15,7 +15,7 @@ let groupCount = 0;//グループ数 0~ [ 0->2, 1->3, 2->4, .... //groupCount%5+
 
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-const time=50;
+const time=40;
 
 let drumroll;
 let drumrollBool = [];
@@ -165,7 +165,7 @@ function draw() {
 
       console.log(obj);
 
-  
+
       rouletteStart = true;//押された
 
     }

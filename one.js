@@ -208,7 +208,7 @@ function draw() {
         ellipse(obj[i].x,obj[i].y,r,r);
 
         noStroke();
-        fill(250,30,30);
+        fill('#d35400');
         textSize(height/16);
 
         push();
@@ -216,7 +216,7 @@ function draw() {
         let a = atan2(obj[i].y - (height/2), obj[i].x - (width/2));//
         rotate(a-PI/2);
         //text(obj[i].num, 0, -50);
-        text("おめでとう!", 0, -height/12);
+        text("当選!", 0, -height/12);
         pop();
 
       }else{

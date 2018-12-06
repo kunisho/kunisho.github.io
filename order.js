@@ -9,7 +9,7 @@ let newTouchBool = false;//そのフレームで新しくタッチが追加さ�
 let r;//タッチした指に表示する円の半径
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-const time=40;
+const time=30;
 
 let drumroll;
 let drumrollBool = [];
