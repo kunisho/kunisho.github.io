@@ -175,6 +175,8 @@ function draw() {
     if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
       if(Math.floor(countMove/time)+1 > (groupCount%5+2)){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
+
+
         location.reload();
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
@@ -301,6 +303,8 @@ function draw() {
       strokeWeight(6);
       textSize(height/24);
       text("決定！", width/2,height/2);
+      textSize(height/48);
+      text("もう一度抽選する", width/2,height/2+height/16);
     }
 
   }else{

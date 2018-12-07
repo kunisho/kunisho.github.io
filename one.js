@@ -232,12 +232,13 @@ function draw() {
 
 
   //--真ん中のボタンのビジュアル
-  noStroke();
-  fill(240,86,70,180);
-  ellipse(width/2,height/2,height/3,height/3);
-  fill(255);
+
 
   if(rouletteStart){
+    noStroke();
+    fill(240,86,70,180);
+    ellipse(width/2,height/2,height/3,height/3);
+    fill(255);
     //ルーレット終わった後　ボタン押された後
     if( countMove < 260 ) {
       //結果発表アニメーション中
@@ -249,6 +250,8 @@ function draw() {
       strokeWeight(6);
       textSize(height/24);
       text("決定！", width/2,height/2);
+      textSize(height/48);
+      text("もう一度抽選する", width/2,height/2+height/16);
     }
 
   }else{
