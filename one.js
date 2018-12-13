@@ -20,7 +20,9 @@ const time=30;
 
 let randomline = 0;
 
+let startTime; // 開始時間
 
+let endTime; // 終了時間
 
 function preload() {
   drumroll = loadSound('src/my-drumroll.wav');
@@ -164,6 +166,7 @@ function draw() {
         drumroll.play();
       }
       rouletteStart = true;//押された
+      startTime = Date.now()
     }
     //抽選後、真ん中のボタン押した時
     if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
@@ -219,6 +222,7 @@ function draw() {
         text("当選!", 0, -height/12);
         pop();
 
+
       }else{
 
         noFill();
@@ -227,6 +231,11 @@ function draw() {
 
       }
     }
+    if(countMove==260){
+      endTime = Date.now(); // 終了時間
+    }
+
+    //text(endTime - startTime,100,100);抽選のアニメーションをの時間を測る用
   }
 
 
