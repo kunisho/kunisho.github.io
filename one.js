@@ -153,7 +153,7 @@ function draw() {
     //抽選開始
     // console.log("beforeFrameTouchesLength:"+beforeFrameTouchesLength);
     // console.log("touches.length"+touches.length);
-    console.log("newTouchBool:"+newTouchBool);
+    // console.log("newTouchBool:"+newTouchBool);
 
     if(!rouletteStart&& (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
 
