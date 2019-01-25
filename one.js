@@ -151,9 +151,14 @@ function draw() {
   //真ん中ボタン押された検知
   for(var i = 0; i<touches.length; i++){
     //抽選開始
-    // console.log("beforeFrameTouchesLength:"+beforeFrameTouchesLength);
-    // console.log("touches.length"+touches.length);
-    // console.log("newTouchBool:"+newTouchBool);
+     // console.log("beforeFrameTouchesLength:"+beforeFrameTouchesLength);
+     // console.log("touches.length"+touches.length);
+     // console.log("newTouchBool:"+newTouchBool);
+     if( (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))   ){
+       console.log(!rouletteStart);
+       console.log((obj.length>2) );
+       console.log( (newTouchBool));
+     }
 
     if(!rouletteStart&& (obj.length>2) && (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6)) && (newTouchBool)  ){
 
