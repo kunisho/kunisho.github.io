@@ -154,7 +154,7 @@ function draw() {
      // console.log("beforeFrameTouchesLength:"+beforeFrameTouchesLength);
      // console.log("touches.length"+touches.length);
      // console.log("newTouchBool:"+newTouchBool);
-     if( (dist(obj[(touches.length-1)].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))   ){
+     if( (dist(obj[(touches.length-1) ].x, obj[(touches.length-1)].y, width/2, height/2) < (height/6))   ){
        console.log(!rouletteStart);
        console.log((obj.length>2) );
        console.log( (newTouchBool));
