@@ -105,7 +105,16 @@ function draw() {
 
       if((countMove/time) > (obj.length-1)){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
-        location.reload();
+        //location.reload();
+         rouletteStart = false;//falseはまだ押されてない
+         DecisionObj =[];
+         beforeFrameTouchesLength=0;//前のフレームでのtoucheslength 抽選開始ボタンで、新しく押した指かどうか判定する為に使う
+         newTouchBool = false;//そのフレームで新しくタッチが追加されたかどうかtrue false
+
+         countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
+         randomline = 0;
+         startTime=0; // 開始時間
+         endTime=0; // 終了時間
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
         countMove=(obj.length-1)*time;
