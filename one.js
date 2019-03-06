@@ -190,12 +190,11 @@ function draw() {
 
 
          countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
-
          randomline = 0;
-
          startTime=0; // 開始時間
-
          endTime=0; // 終了時間
+         drumroll.stop();
+         drumroll2.stop();
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
         countMove=260;
