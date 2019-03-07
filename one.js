@@ -17,6 +17,7 @@ let drumroll;
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
 const time=30;
+const endcount=282;
 
 let randomline = 0;
 
@@ -99,7 +100,7 @@ function draw() {
       t=15
     }else if(countMove<220){
       t=15
-    }else if(countMove<282){
+    }else if(countMove<endcount){
       t=20
     }
 
@@ -108,7 +109,7 @@ function draw() {
     }
 
     for(var j = 0; j<(obj.length-1); j++){
-      if(obj[j].num == randomline && countMove<282 ){
+      if(obj[j].num == randomline && countMove<endcount ){
 
           let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
           //アニメーションの線を引く
@@ -128,7 +129,7 @@ function draw() {
     }
 
 
-    if(countMove>282){
+    if(countMove>endcount){
       for(var j = 0; j<(obj.length-1); j++){
         if(obj[j].num==1){
           let a = atan2(obj[j].y - (height/2), obj[j].x - (width/2));//
@@ -179,7 +180,7 @@ function draw() {
     }
     //抽選後、真ん中のボタン押した時
     if( rouletteStart  && (dist(touches[i].x, touches[i].y, width/2, height/2) < (height/6) ) &&  (newTouchBool) && countMove>10){
-      if(countMove>282){
+      if(countMove>endcount){
         //抽選後、アニメーション終わった後、真ん中のボタン押すとリロード　
         //location.reload();
          rouletteStart = false;//falseはまだ押されてない
@@ -193,7 +194,7 @@ function draw() {
          endTime=0; // 終了時間
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
-        countMove=282;
+        countMove=endcount;
         drumroll.stop();
         drumroll2.play();
       }
@@ -222,7 +223,7 @@ function draw() {
     countMove++;//アニメーション用の変数
 
     for(var i = 0; i<(obj.length-1); i++){
-      if( (obj[i].num==1) && (countMove>282) ){
+      if( (obj[i].num==1) && (countMove>endcount) ){
 
         noFill();
         stroke(240,86,70,180);
@@ -249,7 +250,7 @@ function draw() {
 
       }
     }
-    if(countMove==282){
+    if(countMove==endcount){
       endTime = Date.now(); // 終了時間
     }
 
@@ -267,7 +268,7 @@ function draw() {
     ellipse(width/2,height/2,height/3,height/3);
     fill(255);
     //ルーレット終わった後　ボタン押された後
-    if( countMove < 282 ) {
+    if( countMove < endcount ) {
       //結果発表アニメーション中
       strokeWeight(7);
       textSize(height/24);
