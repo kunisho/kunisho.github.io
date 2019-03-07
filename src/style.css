@@ -21,7 +21,8 @@ html,body{
      border-radius: 5px; /*角丸*/
      -webkit-transition: all 0.5s;
      transition: all 0.5s;
-     font-family: "ＭＳ ゴシック",sans-serif; 
+     font-family: "ＭＳ ゴシック",sans-serif;
+     font-size: 200%; 
 }
 
 .b2{
