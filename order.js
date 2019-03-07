@@ -278,7 +278,6 @@ line(x1,y1,x2,y2);
       //押せる前
       noStroke();
       fill(240,86,70,180);
-      fill('#2ecc71');
       ellipse(width/2,height/2,height/3,height/3);
       fill(255);
 
