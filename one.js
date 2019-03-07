@@ -43,9 +43,11 @@ function setup() {
 
 function draw() {
   clear();
-  noStroke();
-  fill(0);
+
+  fill(50);
   rect(0,0,width,height);
+
+  noStroke();
 
   var obj = new Array();
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
