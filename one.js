@@ -99,8 +99,8 @@ function draw() {
       t=15
     }else if(countMove<220){
       t=15
-    }else if(countMove<1000){
-      t=20
+    }else if(countMove<260){
+      t=18
     }
 
     if( (countMove%t) == 0 ){
