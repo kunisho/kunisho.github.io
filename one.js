@@ -32,7 +32,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth,windowHeight );
-  background(255);
+  background(255,0,0);
   textAlign(CENTER,CENTER);
   r=height/13;
 }
@@ -99,7 +99,7 @@ function draw() {
       t=15
     }else if(countMove<220){
       t=15
-    }else if(countMove<260){
+    }else if(countMove<350){
       t=20
     }
 
