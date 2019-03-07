@@ -17,7 +17,7 @@ let drumroll;
 
 let countMove=0;//抽選の結果発表時のアニメーション用のカウント変数
 const time=30;
-const endcount=240;
+const endcount=210;
 
 let randomline = 0;
 
@@ -318,7 +318,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選hoge", width/2,height/2);
+      text("抽選-", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
