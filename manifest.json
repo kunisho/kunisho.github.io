@@ -2,5 +2,11 @@
     "short_name": "PWA",
     "name": "PWA sample app",
     "display": "standalone",
-    "start_url": "index.html"
+    "start_url": "index.html",
+    "icons":
+    {
+      "src": "src/icon.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    }
 }
