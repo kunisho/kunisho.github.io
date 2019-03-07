@@ -22,8 +22,10 @@ let drumrollBool = [];
 
 
 function preload() {
+  inSE = loadSound('src/in.wav');
+  outSE = loadSound('src/out.wav');
   for (var i = 0; i < 17; i++) {
-    drumroll = loadSound('src/drum.wav');
+    drumroll = loadSound('src/decision-v1-end.wav');
     drumrollBool.push(true);
   }
 }
@@ -45,7 +47,14 @@ function draw() {
 
   var obj = new Array();
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
-
+  //in out SE鳴らす
+  if(!rouletteStart){
+    if(beforeFrameTouchesLength<touches.length){
+      inSE.play();
+    }else if(beforeFrameTouchesLength>touches.length){
+      outSE.play();
+    }
+  }
 
   //
   if(beforeFrameTouchesLength<touches.length){
@@ -185,6 +194,11 @@ function draw() {
          randomline = 0;
          startTime=0; // 開始時間
          endTime=0; // 終了時間
+
+         for(var j = 0; j<17; j++){
+           drumrollBool[j]=true;
+         }
+         
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
         countMove=(groupCount%5+2)*time;
