@@ -52,6 +52,9 @@ function draw() {
   if(beforeFrameTouchesLength<touches.length){
     inSE.play();
     newTouchBool = true;
+  }else if(beforeFrameTouchesLength>touches.length){
+    outSE.play();
+    newTouchBool = false;
   }else{
     newTouchBool = false;
   }
@@ -309,7 +312,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選-", width/2,height/2);
+      text("抽選", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
