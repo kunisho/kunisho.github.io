@@ -26,8 +26,9 @@ let startTime; // 開始時間
 let endTime; // 終了時間
 
 function preload() {
-  drumroll = loadSound('src/fingerlot-v1-sample.wav');
-  drumroll2 = loadSound('src/decision-v1-end.wav');
+  end = loadSound('src/decision-v1-end.wav');
+  shuffle = loadSound('src/shuffle.wav');
+
   inSE = loadSound('src/in.wav');
   outSE = loadSound('src/out.wav');
 }
@@ -183,7 +184,7 @@ function draw() {
         }
       }
       if(!rouletteStart){
-        drumroll.play();
+        shuffle.play();
       }
       rouletteStart = true;//押された
       startTime = Date.now()
@@ -205,8 +206,8 @@ function draw() {
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
         countMove=endcount;
-        drumroll.stop();
-        drumroll2.play();
+        shuffle.stop();
+        end.play();
       }
     }
   }
