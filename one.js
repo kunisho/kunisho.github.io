@@ -26,8 +26,8 @@ let startTime; // 開始時間
 let endTime; // 終了時間
 
 function preload() {
-  drumroll = loadSound('src/my-drumroll.wav');
-  drumroll2 = loadSound('src/my-drumroll2.wav');
+  drumroll = loadSound('src/fingerlot-v1-sample.wav');
+  drumroll2 = loadSound('src/decision-v1-end.wav');
   inSE = loadSound('src/in.wav');
   outSE = loadSound('src/out.wav');
 }
@@ -316,7 +316,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選-", width/2,height/2);
+      text("抽選", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
