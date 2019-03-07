@@ -22,7 +22,7 @@ html,body{
      -webkit-transition: all 0.5s;
      transition: all 0.5s;
      font-family: "ＭＳ ゴシック",sans-serif;
-     font-size: 200%; 
+     font-size: 150%;
 }
 
 .b2{
@@ -37,6 +37,8 @@ html,body{
      border-radius: 5px; /*角丸*/
      -webkit-transition: all 0.5s;
      transition: all 0.5s;
+     font-family: "ＭＳ ゴシック",sans-serif;
+     font-size: 150%;
 }
 
 .b3{
@@ -51,6 +53,8 @@ html,body{
      border-radius: 5px; /*角丸*/
      -webkit-transition: all 0.5s;
      transition: all 0.5s;
+     font-family: "ＭＳ ゴシック",sans-serif;
+     font-size: 150%;
 }
 
 .b4{
@@ -65,6 +69,8 @@ html,body{
      border-radius: 5px; /*角丸*/
      -webkit-transition: all 0.5s;
      transition: all 0.5s;
+     font-family: "ＭＳ ゴシック",sans-serif;
+     font-size: 150%; 
 }
 
 h1 {

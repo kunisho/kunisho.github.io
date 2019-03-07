@@ -43,10 +43,6 @@ function setup() {
 
 function draw() {
   clear();
-
-  fill(50);
-  rect(0,0,width,height);
-
   noStroke();
 
   var obj = new Array();
