@@ -16,8 +16,10 @@ let drumrollBool = [];
 
 
 function preload() {
+  inSE = loadSound('src/in.wav');
+  outSE = loadSound('src/out.wav');
   for (var i = 0; i < 17; i++) {
-    drumroll = loadSound('src/drum.wav');
+    drumroll = loadSound('src/decision-v1-end.wav');
     drumrollBool.push(true);
   }
 }
@@ -38,6 +40,14 @@ function draw() {
   var obj = new Array();
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
 
+  //in out SE鳴らす
+  if(!rouletteStart){
+    if(beforeFrameTouchesLength<touches.length){
+      inSE.play();
+    }else if(beforeFrameTouchesLength>touches.length){
+      outSE.play();
+    }
+  }
   //
   if(beforeFrameTouchesLength<touches.length){
     newTouchBool = true;
