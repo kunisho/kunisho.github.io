@@ -125,7 +125,7 @@ function draw() {
          randomline = 0;
          startTime=0; // 開始時間
          endTime=0; // 終了時間
-         
+
          for(var j = 0; j<17; j++){
            drumrollBool[j]=true;
          }
@@ -278,6 +278,7 @@ line(x1,y1,x2,y2);
       //押せる前
       noStroke();
       fill(240,86,70,180);
+      fill('#2ecc71');
       ellipse(width/2,height/2,height/3,height/3);
       fill(255);
 
