@@ -48,13 +48,17 @@ function draw() {
   var obj = new Array();
   let OrderNum=[];//ランダムの数字作るための配列 ex.[1,2,3,4,5,6]
 
-  //
+  //in out SE鳴らす
+  if(!rouletteStart){
+    if(beforeFrameTouchesLength<touches.length){
+      inSE.play();
+    }else if(beforeFrameTouchesLength>touches.length){
+      outSE.play();
+    }
+  }
+
   if(beforeFrameTouchesLength<touches.length){
-    inSE.play();
     newTouchBool = true;
-  }else if(beforeFrameTouchesLength>touches.length){
-    outSE.play();
-    newTouchBool = false;
   }else{
     newTouchBool = false;
   }
@@ -312,7 +316,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選", width/2,height/2);
+      text("抽選-", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
