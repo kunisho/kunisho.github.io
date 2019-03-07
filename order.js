@@ -125,6 +125,10 @@ function draw() {
          randomline = 0;
          startTime=0; // 開始時間
          endTime=0; // 終了時間
+         
+         for(var j = 0; j<17; j++){
+           drumrollBool[j]=true;
+         }
       }else{
         //抽選後、アニメーション中、真ん中のボタン押すと確定　
         countMove=(obj.length-1)*time;
