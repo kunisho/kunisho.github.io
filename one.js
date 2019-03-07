@@ -32,7 +32,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth,windowHeight );
-  background(255,0,0);
+  background(255);
   textAlign(CENTER,CENTER);
   r=height/13;
 }
@@ -99,7 +99,7 @@ function draw() {
       t=15
     }else if(countMove<220){
       t=15
-    }else if(countMove<350){
+    }else if(countMove<1000){
       t=20
     }
 
@@ -305,7 +305,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選", width/2,height/2);
+      text("抽選---", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
