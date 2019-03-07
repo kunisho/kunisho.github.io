@@ -97,11 +97,11 @@ function draw() {
     }else if(countMove<160){
       t=10
     }else if(countMove<200){
-      t=15
+      t=12
     }else if(countMove<220){
-      t=15
+      t=14
     }else if(countMove<endcount){
-      t=17
+      t=15
     }
 
     if( (countMove%t) == 0 ){
@@ -306,7 +306,7 @@ function draw() {
 
       strokeWeight(6);
       textSize(height/28);
-      text("抽選--", width/2,height/2);
+      text("抽選-", width/2,height/2);
       textSize(height/20);
       if(obj.length>0){
         text(obj.length+"人", width/2,height/2+height/20);
