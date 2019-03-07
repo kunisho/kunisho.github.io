@@ -28,6 +28,8 @@ let endTime; // 終了時間
 function preload() {
   drumroll = loadSound('src/my-drumroll.wav');
   drumroll2 = loadSound('src/my-drumroll2.wav');
+  inSE = loadSound('src/in.wav');
+  outSE = loadSound('src/out.wav');
 }
 
 
@@ -48,6 +50,7 @@ function draw() {
 
   //
   if(beforeFrameTouchesLength<touches.length){
+    inSE.play();
     newTouchBool = true;
   }else{
     newTouchBool = false;
